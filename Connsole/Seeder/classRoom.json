@@ -1,0 +1,177 @@
+[
+  {
+    "NumberClass": 1,
+    "NameClass": "10B",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1959/08/31",
+    "EndPromotionClass": "1992/12/13"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "12A",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1963/01/02",
+    "EndPromotionClass": "1956/11/04"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "12A",
+    "NumberOfStudents": 31,
+    "StartPromotionClass": "1951/12/17",
+    "EndPromotionClass": "1965/01/06"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "12A",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1993/02/07",
+    "EndPromotionClass": "1992/04/29"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "1C",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1973/05/01",
+    "EndPromotionClass": "1956/05/27"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1997/06/11",
+    "EndPromotionClass": "1958/06/06"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1973/10/02",
+    "EndPromotionClass": "1958/12/31"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "10B",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1972/03/01",
+    "EndPromotionClass": "1951/01/04"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "1C",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1981/08/09",
+    "EndPromotionClass": "1989/07/20"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "1C",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1990/05/15",
+    "EndPromotionClass": "1991/03/15"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1995/01/25",
+    "EndPromotionClass": "1992/05/17"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "10B",
+    "NumberOfStudents": 31,
+    "StartPromotionClass": "1985/03/17",
+    "EndPromotionClass": "1959/07/04"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "1C",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1953/04/02",
+    "EndPromotionClass": "1993/07/11"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1967/11/11",
+    "EndPromotionClass": "1978/05/30"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "1C",
+    "NumberOfStudents": 31,
+    "StartPromotionClass": "1952/09/19",
+    "EndPromotionClass": "1990/09/22"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1984/04/25",
+    "EndPromotionClass": "1996/03/21"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "1C",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1965/05/12",
+    "EndPromotionClass": "1981/11/08"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "12A",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1996/09/11",
+    "EndPromotionClass": "1965/11/10"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "12A",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1993/12/01",
+    "EndPromotionClass": "1997/02/17"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "10B",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1985/06/29",
+    "EndPromotionClass": "1995/10/23"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "12A",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1955/01/14",
+    "EndPromotionClass": "1980/03/16"
+  },
+  {
+    "NumberClass": 10,
+    "NameClass": "1C",
+    "NumberOfStudents": 29,
+    "StartPromotionClass": "1986/04/19",
+    "EndPromotionClass": "1981/05/03"
+  },
+  {
+    "NumberClass": 1,
+    "NameClass": "10B",
+    "NumberOfStudents": 31,
+    "StartPromotionClass": "1967/12/13",
+    "EndPromotionClass": "1973/10/01"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "12A",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1992/08/08",
+    "EndPromotionClass": "1975/11/08"
+  },
+  {
+    "NumberClass": 12,
+    "NameClass": "12A",
+    "NumberOfStudents": 30,
+    "StartPromotionClass": "1978/07/18",
+    "EndPromotionClass": "1990/10/05"
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "UserId": 2,
+    "ClassRoomId": 14,
+    "SubjectId": 13,
+    "GradeId": 2
+  },
+  {
+    "UserId": 7,
+    "ClassRoomId": 12,
+    "SubjectId": 14,
+    "GradeId": 11
+  },
+  {
+    "UserId": 9,
+    "ClassRoomId": 22,
+    "SubjectId": 19,
+    "GradeId": 25
+  },
+  {
+    "UserId": 16,
+    "ClassRoomId": 18,
+    "SubjectId": 12,
+    "GradeId": 11
+  },
+  {
+    "UserId": 8,
+    "ClassRoomId": 17,
+    "SubjectId": 13,
+    "GradeId": 5
+  },
+  {
+    "UserId": 24,
+    "ClassRoomId": 25,
+    "SubjectId": 20,
+    "GradeId": 2
+  },
+  {
+    "UserId": 21,
+    "ClassRoomId": 11,
+    "SubjectId": 11,
+    "GradeId": 17
+  },
+  {
+    "UserId": 16,
+    "ClassRoomId": 19,
+    "SubjectId": 18,
+    "GradeId": 3
+  },
+  {
+    "UserId": 12,
+    "ClassRoomId": 12,
+    "SubjectId": 14,
+    "GradeId": 6
+  },
+  {
+    "UserId": 8,
+    "ClassRoomId": 13,
+    "SubjectId": 15,
+    "GradeId": 11
+  },
+  {
+    "UserId": 20,
+    "ClassRoomId": 10,
+    "SubjectId": 22,
+    "GradeId": 15
+  },
+  {
+    "UserId": 16,
+    "ClassRoomId": 2,
+    "SubjectId": 16,
+    "GradeId": 4
+  },
+  {
+    "UserId": 7,
+    "ClassRoomId": 9,
+    "SubjectId": 22,
+    "GradeId": 9
+  },
+  {
+    "UserId": 17,
+    "ClassRoomId": 8,
+    "SubjectId": 25,
+    "GradeId": 5
+  },
+  {
+    "UserId": 1,
+    "ClassRoomId": 15,
+    "SubjectId": 5,
+    "GradeId": 21
+  },
+  {
+    "UserId": 18,
+    "ClassRoomId": 13,
+    "SubjectId": 20,
+    "GradeId": 11
+  },
+  {
+    "UserId": 4,
+    "ClassRoomId": 18,
+    "SubjectId": 18,
+    "GradeId": 21
+  },
+  {
+    "UserId": 11,
+    "ClassRoomId": 17,
+    "SubjectId": 14,
+    "GradeId": 11
+  },
+  {
+    "UserId": 25,
+    "ClassRoomId": 25,
+    "SubjectId": 12,
+    "GradeId": 5
+  },
+  {
+    "UserId": 11,
+    "ClassRoomId": 17,
+    "SubjectId": 24,
+    "GradeId": 13
+  },
+  {
+    "UserId": 14,
+    "ClassRoomId": 14,
+    "SubjectId": 21,
+    "GradeId": 14
+  },
+  {
+    "UserId": 5,
+    "ClassRoomId": 8,
+    "SubjectId": 12,
+    "GradeId": 2
+  },
+  {
+    "UserId": 24,
+    "ClassRoomId": 8,
+    "SubjectId": 12,
+    "GradeId": 17
+  },
+  {
+    "UserId": 22,
+    "ClassRoomId": 16,
+    "SubjectId": 11,
+    "GradeId": 7
+  },
+  {
+    "UserId": 3,
+    "ClassRoomId": 20,
+    "SubjectId": 6,
+    "GradeId": 18
+  }
+]
