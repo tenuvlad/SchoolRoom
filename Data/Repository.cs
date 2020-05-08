@@ -54,14 +54,9 @@ namespace Data
             return _dbSet.AsQueryable();
         }
 
-        public void Update(T entity)
+        public bool Commit()
         {
-            _dbSet.Attach(entity);
-            _schoolContext.Entry(entity).State = EntityState.Modified;
-        }
-        public int Commit()
-        {
-            return _schoolContext.SaveChanges();
+            return _schoolContext.SaveChanges() > 0;
         }
     }
 }

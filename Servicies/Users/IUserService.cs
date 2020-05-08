@@ -9,7 +9,7 @@ namespace Servicies.Users
 {
     public interface IUserService : IRepository<User>
     {
-        User GetUserDetailed(int id);
+        UserForDetailed GetUserDetailed(int id);
         List<UserForList> GetUserList();
         void GetUserUpdate();
     }
