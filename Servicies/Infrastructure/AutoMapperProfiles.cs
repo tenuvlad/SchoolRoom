@@ -1,17 +1,23 @@
 ﻿using AutoMapper;
 using Data.Entities;
+using Servicies.ClassRooms.Dto;
+using Servicies.Grades.Dto;
 using Servicies.Users.Dto;
+using System.Linq;
 
 namespace Servicies.Infrastructure
 {
-    public  class AutoMapperProfiles : Profile
+    public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles()
         {
-            CreateMap<User, UserForDetailed>();
-            CreateMap<User, UserForList>();
-            CreateMap<User, UserForUpdate>();
+            CreateMap<User, UserDto>().ForMember(u => u.Score, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.Grade)))
+                                       .ForMember(c => c.ClassRoomLists, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.ClassRoom)));
 
+            CreateMap<ClassRoom, ClassRoomDto>().ForMember(c => c.NumberOfStudents, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.User)));
+            CreateMap<ClassRoom, ClassRoomListStudentDto>().ForMember(c => c.UsersList, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.User)));
+
+            CreateMap<Grade, GradeDto>();
         }
     }
 }

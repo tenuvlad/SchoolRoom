@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Servicies.Users.Dto;
 using System;
 using System.Collections.Generic;
@@ -19,36 +20,29 @@ namespace Servicies.Users
             _mapper = mapper;
         }
 
-        public User AddUser(User user)
+        public List<UserDto> GetTeacherList()
         {
-            Add(user);
-            Commit();
-            return user;
-        }
-
-        public User DeleteUser(User user)
-        {
-            Delete(user);
-            Commit();
-            return user;
-        }
-        public UserForDetailed GetUserDetailed(int id)
-        {
-            var userToReturn = _mapper.Map<UserForDetailed>(GetById(id));
-            return userToReturn;
-        }
-
-        public List<UserForList> GetUserList()
-        {
-            var users = GetAll();
-            var usersToReturn = _mapper.Map<List<UserForList>>(users);
+            var users = GetAll().Where(u => u.Type == "Teacher");
+            var usersToReturn = _mapper.Map<List<UserDto>>(users);
 
             return usersToReturn;
         }
-
-        public void GetUserUpdate()
+        public IEnumerable<UserDto> GetStudentList()
         {
-            throw new NotImplementedException();
+            var users = _context.Users.Include(user => user.UserClassroomGrade).ThenInclude(grade => grade.Grade).ToList().Where(u => u.Type == "Student");
+            var usersToReturn = _mapper.Map<IEnumerable<UserDto>>(users);
+
+            return usersToReturn;
         }
+        public UserDto DetailUser(int id)
+        {
+            var userDetail = GetById(id);
+            var users = _context.Users.Include(user => user.UserClassroomGrade).ThenInclude(classRoom => classRoom.ClassRoom).ToList();
+            var userToReturn = _mapper.Map<UserDto>(userDetail);
+
+            return userToReturn;
+        }
+
+
     }
 }

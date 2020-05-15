@@ -1,9 +1,5 @@
-﻿
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Servicies.Users;
-using Servicies.Users.Dto;
-using System.Collections.Generic;
 
 namespace SchoolApp.Controllers
 {
@@ -15,15 +11,23 @@ namespace SchoolApp.Controllers
         {
             _repo = repo;
         }
-        [HttpGet("user/getall")]
-        public IActionResult UserList()
+        
+        [HttpGet("user/teacherall")]
+        public IActionResult TeacherList()
         {
-            return View(_repo.GetUserList());
+            return View(_repo.GetTeacherList());
         }
-        [HttpGet("{id}", Name = "GetUser")]
-        public IActionResult UserDetailed(int id)
+
+        [HttpGet("user/studentall")]
+        public IActionResult StudentList()
         {
-            return View(_repo.GetUserDetailed(id));
+            return View(_repo.GetStudentList());
+        }
+
+        [HttpGet("user/detail/{id}")]
+        public IActionResult UserDetail(int id)
+        {
+            return View(_repo.DetailUser(id));
         }
     }
 }

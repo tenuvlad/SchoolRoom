@@ -8,6 +8,6 @@ namespace Data.Entities
     {
         public int Id { get; set; }
         public int Score { get; set; }
-        public ICollection<UserClassroomSubjectGrade> UserClassroomSubjectGrade { get; set; }
+        public ICollection<UserClassroomGrade> UserClassroomGrade { get; set; }
     }
 }

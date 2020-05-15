@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Data;
+using Data.Entities;
+using Servicies.ClassRooms.Dto;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Servicies.ClassRooms
 {
-    public interface IClassRoomService
+    public interface IClassRoomService : IRepository<ClassRoom>
     {
+        ClassRoomListStudentDto GetClassDetaile(int id);
+        IEnumerable<ClassRoomDto> GetClassRoomList();
+
+/*        public ClassRoomDto GetClassDetaile(int id);*/
+/*        public ClassRoomDto EditClass(int id);*/
     }
 }

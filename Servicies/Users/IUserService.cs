@@ -9,8 +9,8 @@ namespace Servicies.Users
 {
     public interface IUserService : IRepository<User>
     {
-        UserForDetailed GetUserDetailed(int id);
-        List<UserForList> GetUserList();
-        void GetUserUpdate();
+        UserDto DetailUser(int id);
+        List<UserDto> GetTeacherList();
+        IEnumerable<UserDto> GetStudentList();
     }
 }
