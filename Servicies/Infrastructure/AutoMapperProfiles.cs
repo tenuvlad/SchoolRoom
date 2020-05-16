@@ -11,6 +11,7 @@ namespace Servicies.Infrastructure
     {
         public AutoMapperProfiles()
         {
+            CreateMap<UserCreateDto, User>();
             CreateMap<User, UserDto>().ForMember(u => u.Score, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.Grade)))
                                        .ForMember(c => c.ClassRoomLists, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.ClassRoom)));
 

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Servicies.Users;
+using Servicies.Users.Dto;
 
 namespace SchoolApp.Controllers
 {
-    public class UserController : Controller
+/*    [Authorize]
+*/    public class UserController : Controller
     {
         private readonly IUserService _repo;
 
@@ -28,6 +31,18 @@ namespace SchoolApp.Controllers
         public IActionResult UserDetail(int id)
         {
             return View(_repo.DetailUser(id));
+        }
+        [HttpGet("user/create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(UserCreateDto user)
+        {
+            _repo.AddNewUser(user);
+            return RedirectToAction("UserDetail");
         }
     }
 }

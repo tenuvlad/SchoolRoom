@@ -43,6 +43,11 @@ namespace Servicies.Users
             return userToReturn;
         }
 
-
+        public void AddNewUser(UserCreateDto user)
+        {
+            var userReturn =_mapper.Map<User>(user);
+            Add(userReturn);
+            Commit();
+        }
     }
 }

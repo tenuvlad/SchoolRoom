@@ -33,7 +33,13 @@ namespace Servicies.ClassRooms
             return studentListFromClassReturn;
         }
 
-
+        public ClassRoomDto AddNewClass(ClassRoomDto classRoom)
+        {
+            var classRoomReturn = _mapper.Map<ClassRoomDto>(classRoom);
+            _context.Add(classRoom);
+            Commit();
+            return classRoomReturn;
+        }
 
     }
 }

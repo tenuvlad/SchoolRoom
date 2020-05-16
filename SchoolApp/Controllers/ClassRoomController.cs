@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Servicies.ClassRooms;
+using Servicies.ClassRooms.Dto;
 using System.Linq;
 
 namespace SchoolApp.Controllers
@@ -22,6 +23,17 @@ namespace SchoolApp.Controllers
         public IActionResult StudentsFromAClass(int id)
         {
             return View(_repo.GetClassDetaile(id));
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost("class/create"), ActionName("Create")]
+        public IActionResult CreateClass(ClassRoomDto classRoom)
+        {
+            return View(_repo.AddNewClass(classRoom));
         }
     }
 }
