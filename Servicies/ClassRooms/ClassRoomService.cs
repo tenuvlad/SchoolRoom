@@ -3,6 +3,7 @@ using Data;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Servicies.ClassRooms.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,12 +34,12 @@ namespace Servicies.ClassRooms
             return studentListFromClassReturn;
         }
 
-        public ClassRoomDto AddNewClass(ClassRoomDto classRoom)
+        public void AddNewClass(ClassRoomDto classRoom)
         {
-            var classRoomReturn = _mapper.Map<ClassRoomDto>(classRoom);
-            _context.Add(classRoom);
+            if (classRoom == null) throw new ArgumentNullException(nameof(classRoom));
+            var classRoomReturn = _mapper.Map<ClassRoom>(classRoom);
+            Add(classRoomReturn);
             Commit();
-            return classRoomReturn;
         }
 
     }

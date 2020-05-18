@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Servicies.ClassRooms;
+using Servicies.Grades;
 
 namespace Servicies.Infrastructure
 {
@@ -18,7 +19,8 @@ namespace Servicies.Infrastructure
 				.AddAutoMapper(typeof(AutoMapperProfiles).Assembly)
 				.AddScoped(typeof(IRepository<>), typeof(Repository<>))
 				.AddScoped<IUserService, UserService>()
-				.AddScoped<IClassRoomService, ClassRoomService>();
+				.AddScoped<IClassRoomService, ClassRoomService>()
+				.AddScoped<IGradeService, GradeService>();
 
 			return services;
 

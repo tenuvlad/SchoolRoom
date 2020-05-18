@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Servicies.ClassRooms;
 using Servicies.ClassRooms.Dto;
-using System.Linq;
 
 namespace SchoolApp.Controllers
 {
@@ -30,10 +33,17 @@ namespace SchoolApp.Controllers
         {
             return View();
         }
-        [HttpPost("class/create"), ActionName("Create")]
-        public IActionResult CreateClass(ClassRoomDto classRoom)
+
+        [HttpPost, ActionName("Create")]
+        public IActionResult CreatePost(ClassRoomDto newClassRoom)
         {
-            return View(_repo.AddNewClass(classRoom));
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _repo.AddNewClass(newClassRoom);
+            return View(newClassRoom);
         }
     }
 }

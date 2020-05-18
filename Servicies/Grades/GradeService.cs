@@ -1,10 +1,28 @@
-﻿using System;
+﻿using AutoMapper;
+using Data;
+using Data.Entities;
+using Servicies.Grades.Dto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Servicies.Grades
 {
-    class GradeService
+    public class GradeService : Repository<Grade>, IGradeService
     {
+        public readonly SchoolContext _context;
+        private readonly IMapper _mapper;
+        public GradeService(SchoolContext context, IMapper mapper) : base(context)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
+        public void AddNewGrade(GradeDto grade)
+        {
+            var gradereturn = _mapper.Map<Grade>(grade);
+            Add(gradereturn);
+            Commit();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Servicies.ClassRooms.Dto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +9,7 @@ namespace Servicies.Users.Dto
 {
     public class UserCreateDto
     {
+        public int Id { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         [Column("FirstName")]
@@ -22,6 +24,7 @@ namespace Servicies.Users.Dto
         public DateTime DateOfBirth { get; set; }
         [Required]
         public int PhoneNumber { get; set; }
+        public string Email { get; set; }
         [Required]
         public string City { get; set; }
         [Required]

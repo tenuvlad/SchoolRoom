@@ -19,7 +19,7 @@ namespace Servicies.Users.Dto
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
         public string Type { get; set; }
-        public IEnumerable<GradeDto> Score { get; set; }
+        public int Score { get; set; }
         public IEnumerable<ClassRoomDto> ClassRoomLists { get; set; }
     }
 }

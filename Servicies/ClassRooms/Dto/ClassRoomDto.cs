@@ -12,7 +12,7 @@ namespace Servicies.ClassRooms.Dto
         public int UserId { get; set; }
         public int GradeId { get; set; }
         public string NameClass { get; set; }
-        public IEnumerable<UserDto> NumberOfStudents { get; set; }
+        public int NumberOfStudents { get; set; }
 
     }
 }

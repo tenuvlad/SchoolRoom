@@ -42,7 +42,7 @@ namespace SchoolApp.Controllers
         public IActionResult Create(UserCreateDto user)
         {
             _repo.AddNewUser(user);
-            return RedirectToAction("UserDetail");
+            return View(user);
         }
     }
 }

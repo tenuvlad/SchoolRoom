@@ -22,6 +22,7 @@ namespace Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<UserClassroomGrade>()
                         .HasKey(z => new { z.UserId, z.ClassRoomId, z.GradeId });
+
             modelBuilder.Entity<UserRole>(userRole =>
             {
                 userRole.HasKey(ur => new { ur.UserId, ur.RoleId, });

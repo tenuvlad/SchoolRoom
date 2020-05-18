@@ -9,6 +9,6 @@ namespace Servicies.ClassRooms
     {
         ClassRoomListStudentDto GetClassDetaile(int id);
         IEnumerable<ClassRoomDto> GetClassRoomList();
-        ClassRoomDto AddNewClass(ClassRoomDto classRoom);
+        void AddNewClass(ClassRoomDto classRoom);
     }
 }
