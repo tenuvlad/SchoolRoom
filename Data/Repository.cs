@@ -54,9 +54,9 @@ namespace Data
             return _dbSet.AsQueryable();
         }
 
-        public bool Commit()
+        public void Commit()
         {
-            return _schoolContext.SaveChanges() > 0;
+            _schoolContext.SaveChanges();
         }
     }
 }

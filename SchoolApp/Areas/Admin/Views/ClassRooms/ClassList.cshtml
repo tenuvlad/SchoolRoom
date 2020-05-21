@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Servicies.ClassRooms.Dto.ClassRoomDto>
+
+@{
+    ViewData["Title"] = "ClassList";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Class List</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameClass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfStudents)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameClass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfStudents)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

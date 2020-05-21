@@ -49,5 +49,20 @@ namespace Servicies.Users
             Add(userReturn);
             Commit();
         }
+
+        public void DeleteUser(int id)
+        {
+            var user = GetById(id);
+            Delete(user);
+            Commit();
+        }
+
+        public void EditUser(UserCreateDto user)
+        {
+            var userReturn = _mapper.Map<User>(user);
+            _context.Update(userReturn);
+            Commit();
+        }
+
     }
 }

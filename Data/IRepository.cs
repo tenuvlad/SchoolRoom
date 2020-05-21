@@ -16,6 +16,6 @@ namespace Data
         IQueryable<T> Query(Expression<Func<T, bool>> expression);
         IQueryable<T> Query();
         T GetById(int id);
-        bool Commit();
+        void Commit();
     }
 }

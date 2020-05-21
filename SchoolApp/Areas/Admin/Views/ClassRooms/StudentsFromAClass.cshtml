@@ -1,0 +1,46 @@
+﻿@model Servicies.ClassRooms.Dto.ClassRoomListStudentDto
+
+@{
+    ViewData["Title"] = "StudentsFromAClass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<h3>Students from a class</h3>
+<html>
+<head>
+</head>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameClass)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.NameClass)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.UsersList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.LastName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

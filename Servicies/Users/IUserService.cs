@@ -13,5 +13,7 @@ namespace Servicies.Users
         UserDto DetailUser(int id);
         List<UserDto> GetTeacherList();
         IEnumerable<UserDto> GetStudentList();
+        void DeleteUser(int id);
+        void EditUser(UserCreateDto user);
     }
 }

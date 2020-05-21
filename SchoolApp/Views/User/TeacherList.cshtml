@@ -4,7 +4,9 @@
     ViewData["Title"] = "TeacherList";
 }
 
-<h1>Teachers</h1>
+<h1>Here is a list of teachers</h1>
+
+<a asp-action="Create" value="Create" class="btn btn-primary">Create</a>
 
 <table class="table">
     <thead>
@@ -58,7 +60,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Detail", "UserDetail", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
             </tr>
         }
     </tbody>
 </table>
+<a asp-action="Home">Back to Home</a>
