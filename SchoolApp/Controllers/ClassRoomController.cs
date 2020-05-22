@@ -51,31 +51,6 @@ namespace SchoolApp.Controllers
             return View(newClassRoom);
         }
 
-        [HttpGet("classroom/adduserinclass/{id}")]
-        public IActionResult AddUserInClass(int id)
-        {
-            return View(_repo.ClassDetailes(id));
-        }
-
-        [HttpPost, ActionName("AddUserInClass")]
-        public IActionResult AddUserInClass(ClassRoomDto classRoomModel)
-        {
-            var users = new List<UserDto>();
-            foreach (var item in classRoomModel.UserId)
-            {
-                var useerid = _user.DetailUser(Int32.Parse(item.ToString()));
-                users.Add(useerid);
-            }
-            var classRoom = new ClassRoomDto
-            {
-                UserForClass = users
-            };
-
-            _repo.AddUserToClass(classRoom);
-
-            return RedirectToAction("ClassList");
-        }
-
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -87,6 +62,19 @@ namespace SchoolApp.Controllers
         {
             _repo.EditClass(classRoom);
             return View(classRoom);
+        }
+
+        [HttpGet("classroom/AddUserToClass/{id}")]
+        public IActionResult AddUserToClass(int id)
+        {
+            return View(_repo.GetUserClassById(id));
+        }
+
+        [HttpPost, ActionName("AddUserToClass")]
+        public IActionResult AddUserClass(AddUserClassDto newUserClass)
+        {
+            _repo.AddUserClass(newUserClass);
+            return RedirectToAction("AddUserToClass");
         }
     }
 }

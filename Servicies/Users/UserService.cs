@@ -46,6 +46,7 @@ namespace Servicies.Users
         public void AddNewUser(UserCreateDto user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
+            var userInclude = _context.ClassRooms.Include(a => a.UserClassroomGrade).Where(b => b.Id == user.ClassRoomId);
             var userReturn = _mapper.Map<User>(user);
             Add(userReturn);
             Commit();
@@ -63,6 +64,7 @@ namespace Servicies.Users
         public void EditUser(UserDto user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
+            var userInclude = _context.ClassRooms.Include(a => a.UserClassroomGrade).Where(b => b.Id == user.ClassRoomId);
             var userUpdate = GetById(user.Id);
             if (userUpdate != null)
             {
