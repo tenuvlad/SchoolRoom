@@ -75,8 +75,16 @@ namespace Servicies.ClassRooms
 
             return classReturn;
         }
+        public void DeleteClass(int id)
+        {
+            if (id == 0) throw new ArgumentNullException(nameof(id));
+            var classroom = GetById(id);
+            var classMap = _mapper.Map<ClassRoom>(classroom);
+            Delete(classMap);
+            Commit();
+        }
 
-        public ClassRoomDto AddUserClass(AddUserClassDto newUserClass)
+        public void AddUserClass(AddUserClassDto newUserClass)
         {
             User user = _context.Users
                 .Include(x => x.UserClassroomGrade).ThenInclude(y => y.ClassRoom)
@@ -105,7 +113,6 @@ namespace Servicies.ClassRooms
             Commit();
 
             var classMap = _mapper.Map<ClassRoomDto>(classroom);
-            return classMap;
         }
     }
 }

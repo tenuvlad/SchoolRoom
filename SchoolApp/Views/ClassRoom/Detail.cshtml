@@ -6,7 +6,6 @@
 }
 
 <!DOCTYPE html>
-<h3>Students from a class</h3>
 <html>
 <head>
 </head>
@@ -23,25 +22,32 @@
             </tr>
         </thead>
         <tbody>
+            <h3>Students from a class</h3>
             @foreach (var item in Model.Users)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayNameFor(model => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.LastName)
-                    </td>
-                </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Score)
+            </td>
+        </tr>
             }
         </tbody>
     </table>
-    @Html.ActionLink("Add user in class", "AddUserInClass", new { id = Model.Id })
+    @Html.ActionLink("Add user in class", "AddUserToClass", new { id = Model.Id })
 </body>
 </html>

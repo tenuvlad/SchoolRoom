@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SchoolApp.ViewModel;
 using Servicies.ClassRooms;
 using Servicies.ClassRooms.Dto;
 using Servicies.Users;
@@ -62,6 +61,19 @@ namespace SchoolApp.Controllers
         {
             _repo.EditClass(classRoom);
             return View(classRoom);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(_repo.ClassDetaile(id));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteUser(int id)
+        {
+            _repo.DeleteClass(id);
+            return RedirectToAction("ClassList");
         }
 
         [HttpGet("classroom/AddUserToClass/{id}")]

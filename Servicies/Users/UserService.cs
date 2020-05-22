@@ -56,8 +56,8 @@ namespace Servicies.Users
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var user = GetById(id);
-            var userToReturn = _mapper.Map<User>(user);
-            Delete(userToReturn);
+            var userMap = _mapper.Map<User>(user);
+            Delete(userMap);
             Commit();
         }
 

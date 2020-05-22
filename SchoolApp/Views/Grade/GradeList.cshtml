@@ -4,17 +4,14 @@
     ViewData["Title"] = "GradeList";
 }
 
-<h1>GradeList</h1>
+<h1>List of grade</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" value="Create" class="btn btn-primary">Create</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Score)
             </th>
@@ -25,15 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Score)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

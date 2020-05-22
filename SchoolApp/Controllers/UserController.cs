@@ -45,7 +45,6 @@ namespace SchoolApp.Controllers
             return View(user);
         }
 
-
         [HttpGet]
         public IActionResult Delete(int id)
         {
