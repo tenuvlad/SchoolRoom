@@ -7,6 +7,7 @@ namespace Servicies.Grades
 {
     public interface IGradeService
     {
+        List<GradeDto> GetGradeList();
         void AddNewGrade(GradeDto grade);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Servicies.ClassRooms.Dto.ClassRoomListStudentDto
+﻿@model Servicies.ClassRooms.Dto.ClassRoomDetailDto
 
 @{
     ViewData["Title"] = "StudentsFromAClass";
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.UsersList)
+            @foreach (var item in Model.Users)
             {
                 <tr>
                     <td>

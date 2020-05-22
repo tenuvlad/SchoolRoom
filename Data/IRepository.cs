@@ -11,6 +11,7 @@ namespace Data
     {
         void Add(T entity);
         List<T> GetAll();
+        void Update(T entity);
         void Delete(T entity);
         void Delete(IEnumerable<T> entities);
         IQueryable<T> Query(Expression<Func<T, bool>> expression);

@@ -18,6 +18,14 @@ namespace Servicies.Grades
             _mapper = mapper;
         }
 
+        public List<GradeDto> GetGradeList()
+        {
+            var grades = GetAll();
+            var gradeToReturn = _mapper.Map<List<GradeDto>>(grades);
+
+            return gradeToReturn;
+        }
+
         public void AddNewGrade(GradeDto grade)
         {
             var gradereturn = _mapper.Map<Grade>(grade);

@@ -17,6 +17,12 @@ namespace SchoolApp.Controllers
             _repo = repo;
         }
 
+        [HttpGet]
+        public IActionResult GradeList()
+        {
+            return View(_repo.GetGradeList());
+        }
+
         [HttpGet("grade/create")]
         public IActionResult Create()
         {

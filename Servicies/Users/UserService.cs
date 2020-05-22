@@ -45,23 +45,46 @@ namespace Servicies.Users
 
         public void AddNewUser(UserCreateDto user)
         {
-            var userReturn =_mapper.Map<User>(user);
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            var userReturn = _mapper.Map<User>(user);
             Add(userReturn);
             Commit();
         }
 
         public void DeleteUser(int id)
         {
+            if (id == 0) throw new ArgumentNullException(nameof(id));
             var user = GetById(id);
-            Delete(user);
+            var userToReturn = _mapper.Map<User>(user);
+            Delete(userToReturn);
             Commit();
         }
 
-        public void EditUser(UserCreateDto user)
+        public void EditUser(UserDto user)
         {
-            var userReturn = _mapper.Map<User>(user);
-            _context.Update(userReturn);
-            Commit();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            var userUpdate = GetById(user.Id);
+            if (userUpdate != null)
+            {
+                userUpdate.Id = user.Id;
+                userUpdate.FirstName = user.FirstName;
+                userUpdate.LastName = user.LastName;
+                userUpdate.DateOfBirth = user.DateOfBitrh;
+                userUpdate.City = user.City;
+                userUpdate.Country = user.Country;
+                userUpdate.PhoneNumber = user.PhoneNumber;
+                userUpdate.Type = user.Type;
+            }
+            var userReturn = _mapper.Map<User>(userUpdate);
+            Update(userReturn);
+        }
+
+        public IEnumerable<UserDto> GetUsersList()
+        {
+            var users = Query().OrderBy(x => x.FirstName).ToList();
+            var usersList = _mapper.Map<IEnumerable<UserDto>>(users);
+
+            return usersList;
         }
 
     }

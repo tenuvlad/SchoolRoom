@@ -1,4 +1,5 @@
-﻿using Servicies.ClassRooms.Dto;
+﻿using Data.Entities;
+using Servicies.ClassRooms.Dto;
 using Servicies.Grades.Dto;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Servicies.Users.Dto
         public string PhoneNumber { get; set; }
         public string Type { get; set; }
         public int Score { get; set; }
-        public IEnumerable<ClassRoomDto> ClassRoomLists { get; set; }
+        public IEnumerable<ClassRoomDto> ClassRoomList { get; set; }
+        public IEnumerable<UserClassroomGrade> ClassRooms { get; set; }
     }
 }

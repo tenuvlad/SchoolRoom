@@ -14,6 +14,6 @@ namespace Servicies.Users
         List<UserDto> GetTeacherList();
         IEnumerable<UserDto> GetStudentList();
         void DeleteUser(int id);
-        void EditUser(UserCreateDto user);
+        void EditUser(UserDto user);
     }
 }

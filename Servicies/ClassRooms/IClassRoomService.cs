@@ -7,8 +7,11 @@ namespace Servicies.ClassRooms
 {
     public interface IClassRoomService : IRepository<ClassRoom>
     {
-        ClassRoomListStudentDto GetClassDetaile(int id);
         IEnumerable<ClassRoomDto> GetClassRoomList();
+        public ClassRoomDetailDto ClassDetaile(int id);
         void AddNewClass(ClassRoomDto classRoom);
+        void AddUserToClass(ClassRoomDto classRoom);
+        void EditClass(ClassRoomDto classRoom);
+        ClassRoomDto ClassDetailes(int id);
     }
 }

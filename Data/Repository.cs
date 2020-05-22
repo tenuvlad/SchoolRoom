@@ -24,6 +24,14 @@ namespace Data
             _dbSet.Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            _dbSet.Attach(entity);
+            var entry = _schoolContext.Entry(entity);
+            entry.State = EntityState.Modified;
+            _schoolContext.SaveChanges();
+        }
+
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);

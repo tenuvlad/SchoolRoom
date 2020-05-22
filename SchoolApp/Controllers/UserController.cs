@@ -14,7 +14,7 @@ namespace SchoolApp.Controllers
         {
             _repo = repo;
         }
-        
+
         [HttpGet]
         public IActionResult TeacherList()
         {
@@ -44,24 +44,29 @@ namespace SchoolApp.Controllers
             _repo.AddNewUser(user);
             return View(user);
         }
+
+
         [HttpGet]
-        public IActionResult Delete()
-        {
-            return View();
-        }
-        [HttpDelete,ActionName("Delete")]
         public IActionResult Delete(int id)
         {
-            _repo.DeleteUser(id);
-            return View(id);
+            return View(_repo.DetailUser(id));
         }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteUser(int id)
+        {
+            _repo.DeleteUser(id);
+            return RedirectToAction("StudentList");
+        }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
             return View(_repo.DetailUser(id));
         }
+
         [HttpPost, ActionName("Edit")]
-        public IActionResult UserEdit(UserCreateDto user)
+        public IActionResult UserEdit(UserDto user)
         {
             _repo.EditUser(user);
             return View(user);
