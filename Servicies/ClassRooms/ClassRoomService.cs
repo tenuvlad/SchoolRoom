@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Servicies.ClassRooms.Dto;
-using Servicies.Grades.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +13,11 @@ namespace Servicies.ClassRooms
     {
         public readonly SchoolContext _context;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ClassRoomService(SchoolContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(context)
+        public ClassRoomService(SchoolContext context, IMapper mapper) : base(context)
         {
             _context = context;
             _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public IEnumerable<ClassRoomDto> GetClassRoomList()
@@ -49,24 +45,6 @@ namespace Servicies.ClassRooms
             Add(classRoomReturn);
             Commit();
         }
-
-/*        public void AddUserToClass(ClassRoomDto classRoom)
-        {
-            if (classRoom == null) throw new ArgumentNullException(nameof(classRoom));
-
-            foreach (var user in classRoom.UserForClass)
-            {
-                var userClass = new UserClassroomGrade
-                {
-                    UserId = user.Id,
-                    ClassRoomId = classRoom.Id,
-                    GradeId = 0
-                };
-
-                _context.UserClassroomGrades.Add(userClass);
-                Commit();
-            }
-        }*/
 
         public void EditClass(ClassRoomDto classRoom)
         {
