@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Servicies.ClassRooms.Dto;
-using Servicies.Grades.Dto;
-using Servicies.Users.Dto;
+using Servicies.Courses.Dto;
+using Servicies.Departments.Dto;
+using Servicies.OfficeAssignments.Dto;
+using Servicies.Students.Dto;
+using Servicies.Teachers.Dto;
 using System.Linq;
 
 namespace Servicies.Infrastructure
@@ -11,19 +13,27 @@ namespace Servicies.Infrastructure
     {
         public AutoMapperProfiles()
         {
-            CreateMap<UserCreateDto, User>();
-            CreateMap<UserDto, User>();
-            CreateMap<User, UserDto>().ForMember(u => u.Score, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.Grade).Count()))
-                                       .ForMember(c => c.ClassRoomList, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.ClassRoom)));
+            CreateMap<Department, DepartmentDetailDto>()
+                .ForMember(teacher => teacher.TeacherFullName, opt => opt
+                .MapFrom(person => person.Teacher.FullName));
 
-            CreateMap<ClassRoomDto, ClassRoom>();
-            CreateMap<ClassRoom, ClassRoomDto>().ForMember(c => c.NumberOfStudents, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.User).Count()))
-                                                                         .ForMember(c => c.UserForClass, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.User)));
-            CreateMap<ClassRoom, AddUserClassDto>();
-            CreateMap<ClassRoom, ClassRoomDetailDto>().ForMember(c => c.Users, opt => opt.MapFrom(s => s.UserClassroomGrade.Select(x => x.User)));
+            CreateMap<Teacher, TeacherDto>();
+            CreateMap<TeacherDto, Teacher>();
 
-            CreateMap<Grade, GradeDto>();
-            CreateMap<GradeDto, Grade>();
+            CreateMap<Student, StudentDto>();
+            CreateMap<StudentDto, Student>();
+
+            CreateMap<OfficeAssignment, OfficeAssignmentsDto>();
+            CreateMap<OfficeAssignmentsDto, OfficeAssignment>();
+
+            CreateMap<DepartmentDto, Department>();
+            CreateMap<Department, DepartmentDto>();
+
+            CreateMap<Course, CourseDetailDto>()
+                .ForMember(numberStudent => numberStudent.NumberOfStudents, opt => opt
+                .MapFrom(enroll => enroll.Enrollments
+                .Select(student => student.Student).Count()));
+            CreateMap<CourseDto, Course>();
         }
     }
 }
