@@ -6,7 +6,6 @@
 
 <h1>Create</h1>
 
-<h4>DepartmentDto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -28,16 +27,12 @@
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TeacherId" class="control-label"></label>
-                <input asp-for="TeacherId" class="form-control" />
-                <span asp-validation-for="TeacherId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Courses" class="col-md-2 control-label"></label>
+                <label asp-for="Teacher" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <select asp-for="Courses" class="form-control" asp-items="ViewBag.Courses">
-                        <option value="">-- Select Courses --</option>
+                    <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.TeacherId">
+                        <option value="">-- Select Teachers --</option>
                     </select>
+                    <span asp-validation-for="TeacherId" class="text-danger" />
                 </div>
             </div>
             <div class="form-group">
@@ -48,7 +43,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List">Back to List</a>
 </div>
 
 @section Scripts {

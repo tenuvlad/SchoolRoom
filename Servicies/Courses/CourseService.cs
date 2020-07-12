@@ -14,11 +14,15 @@ namespace Servicies.Courses
     {
         private readonly SchoolContext _context;
         private readonly IMapper _mapper;
+        private readonly IRepository<Enrollment> _enrollmentsRepo;
+        private readonly IRepository<CourseAssignment> _assignmentRepo;
 
-        public CourseService(SchoolContext context, IMapper mapper) : base(context)
+        public CourseService(SchoolContext context, IMapper mapper, IRepository<Enrollment> enrollmentsRepo, IRepository<CourseAssignment> assignmentRepo) : base(context)
         {
             _context = context;
             _mapper = mapper;
+            _enrollmentsRepo = enrollmentsRepo;
+            _assignmentRepo = assignmentRepo;
         }
 
         public CourseDetailDto CourseDetail(int id)
@@ -27,6 +31,13 @@ namespace Servicies.Courses
             var courseEntity = GetById(id);
             var course = _context.Courses.Include(table => table.Enrollments).ThenInclude(student => student.Student).ToList();
             var courseMap = _mapper.Map<CourseDetailDto>(courseEntity);
+            return courseMap;
+        }
+        public CourseDto CourseForEditDetail(int id)
+        {
+            if (id == 0) throw new ArgumentNullException(nameof(id));
+            var courseEntity = GetById(id);
+            var courseMap = _mapper.Map<CourseDto>(courseEntity);
             return courseMap;
         }
 
@@ -40,27 +51,58 @@ namespace Servicies.Courses
         public void CreateNewCourse(CourseDto course)
         {
             if (course == null) throw new ArgumentNullException(nameof(course));
-            var courseDepart = _context.Courses.Include(depart => depart.DepartmentId).Where(departId => departId.DepartmentId == course.Department.Id);
-            var courseEntity = GetById(course.Id);
-            var courseMap = _mapper.Map<Course>(courseEntity);
-            Add(courseMap);
+            var courseEntity = new Course
+            {
+                Title = course.Title,
+                Credits = course.Credits,
+                CourseNumber = course.CourseNumber,
+                DepartmentId = course.DepartmentId
+            };
+            Add(courseEntity);
+            Commit();
+
+            var enrollment = new Enrollment
+            {
+                StudentId = course.StudentId,
+                CourseId = courseEntity.Id
+            };
+            _enrollmentsRepo.Add(enrollment);
+
+            var courseAssignment = new CourseAssignment
+            {
+                TeacherId = course.TeacherId,
+                CourseId = courseEntity.Id
+            };
+            _assignmentRepo.Add(courseAssignment);
             Commit();
         }
 
         public void EditCourse(CourseDto course)
         {
             if (course == null) throw new ArgumentNullException(nameof(course));
-            var courseEntity = GetById(course.Id);
-            if (courseEntity != null)
+            var courseEntity = new Course
             {
-                courseEntity.Id = course.Id;
-                courseEntity.Credits = course.Credits;
-                courseEntity.DepartmentId = course.DepartmentId;
-                courseEntity.Department = course.Department;
-                courseEntity.Title = course.Title;
-            }
-            var courseMap = _mapper.Map<Course>(courseEntity);
-            Update(courseMap);
+                Id = course.Id,
+                Title = course.Title,
+                Credits = course.Credits,
+                CourseNumber = course.CourseNumber,
+                DepartmentId = course.DepartmentId
+            };
+            Update(courseEntity);
+            var enrollment = new Enrollment
+            {
+                StudentId = course.StudentId,
+                CourseId = courseEntity.Id
+            };
+            _enrollmentsRepo.Add(enrollment);
+
+            var courseAssignment = new CourseAssignment
+            {
+                TeacherId = course.TeacherId,
+                CourseId = courseEntity.Id
+            };
+            _assignmentRepo.Add(courseAssignment);
+            Commit();
         }
 
         public void DeleteCourse(int id)

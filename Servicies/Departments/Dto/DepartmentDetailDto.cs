@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Data.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Servicies.Departments.Dto
 {
     public class DepartmentDetailDto
     {
         public int Id { get; set; }
+        [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "Money")]
         public decimal Budget { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
         [Display(Name = "Teacher")]
-        public string TeacherFullName { get; set; }
+        public int AdministratorId { get; set; }
+        public Teacher Administrator { get; set; }
     }
 }

@@ -13,9 +13,7 @@ namespace Servicies.Infrastructure
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Department, DepartmentDetailDto>()
-                .ForMember(teacher => teacher.TeacherFullName, opt => opt
-                .MapFrom(person => person.Teacher.FullName));
+            CreateMap<Department, DepartmentDetailDto>();
 
             CreateMap<DepartmentDto, Department>()
                 .ForMember(course => course.Courses, opt => opt
@@ -41,7 +39,13 @@ namespace Servicies.Infrastructure
             CreateMap<Course, CourseDto>();
             CreateMap<CourseDto, Course>()
                 .ForMember(department => department.DepartmentId, opt => opt
-                .MapFrom(table => table.Department.Id));
+                .MapFrom(table => table.Department.Id))
+                .ForMember(student => student.Enrollments, opt => opt
+                .MapFrom(table => table.Enrollments
+                .Select(entity => entity.Student).Where(studentId => studentId.Id == table.StudentId)))
+                .ForMember(teacher => teacher.CourseAssignments, opt => opt
+                .MapFrom(table => table.CourseAssignments
+                .Select(entity => entity.Teacher).Where(teacherId => teacherId.Id == table.TeacherId)));
         }
     }
 }

@@ -31,8 +31,15 @@ namespace Servicies.Departments
         public void CreateDepartment(DepartmentDto department)
         {
             if (department == null) throw new ArgumentNullException(nameof(department));
-            var departmentMap = _mapper.Map<Department>(department);
-            Add(departmentMap);
+            var departmentEntity = new Department
+            {
+                Id = department.Id,
+                Name = department.Name,
+                Budget = department.Budget,
+                StartDate = department.StartDate,
+                InstructorId = department.TeacherId,
+            };
+            Add(departmentEntity);
             Commit();
         }
 
@@ -57,19 +64,15 @@ namespace Servicies.Departments
         public void EditDepartment(DepartmentDto department)
         {
             if (department == null) throw new ArgumentNullException(nameof(department));
-            var departmentEntity = GetById(department.Id);
-            var departmentCourseEntity = _context.Courses.Select(id => id.Id).ToList();
-            if (departmentEntity != null)
+            var departmentEntity = new Department
             {
-                departmentEntity.Id = department.Id;
-                departmentEntity.Teacher = department.Teacher;
-                departmentEntity.Budget = department.Budget;
-                departmentEntity.Name = department.Name;
-                departmentEntity.StartDate = department.StartDate;
-                departmentEntity.Courses = department.Courses;
-            }
-            var departmentMap = _mapper.Map<Department>(departmentCourseEntity);
-            Update(departmentMap);
+                Id = department.Id,
+                Name = department.Name,
+                Budget = department.Budget,
+                StartDate = department.StartDate,
+                InstructorId = department.TeacherId
+            };
+            Update(departmentEntity);
         }
 
         public void DeleteDepartment(int id)

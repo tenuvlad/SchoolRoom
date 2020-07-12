@@ -24,7 +24,7 @@ namespace Servicies.Students.Dto
         {
             get
             {
-                return FirstName + ", " + LastName;
+                return FirstName + " " + LastName;
             }
         }
         [DataType(DataType.Date)]

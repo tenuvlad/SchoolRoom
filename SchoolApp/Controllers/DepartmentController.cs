@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Servicies.Courses;
 using Servicies.Departments;
 using Servicies.Departments.Dto;
+using Servicies.Teachers;
 using System;
 
 namespace SchoolApp.Controllers
@@ -11,10 +12,12 @@ namespace SchoolApp.Controllers
     public class DepartmentController: Controller
     {
         private readonly IDepartmentService _repo;
+        private readonly ITeacherService _teacherService;
 
-        public DepartmentController(IDepartmentService repo)
+        public DepartmentController(IDepartmentService repo, ITeacherService teacherService)
         {
             _repo = repo;
+            _teacherService = teacherService;
         }
 
         [HttpGet]
@@ -32,7 +35,12 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            PopulateTeachersDropDownList();
             return View();
+        }
+        private void PopulateTeachersDropDownList(object selectedTeachers = null)
+        {
+            ViewBag.TeacherId = new SelectList(_teacherService.TeacherList(), "Id", "FullName", selectedTeachers);
         }
 
         [HttpPost, ActionName("Create")]
@@ -44,12 +52,14 @@ namespace SchoolApp.Controllers
             }
 
             _repo.CreateDepartment(newDepartment);
+            PopulateTeachersDropDownList(newDepartment.TeacherId);
             return View(newDepartment);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            PopulateTeachersDropDownList();
             return View(_repo.DepartmentDetailForEdit(id));
         }
 
@@ -57,6 +67,7 @@ namespace SchoolApp.Controllers
         public IActionResult EditCourse(DepartmentDto department)
         {
             _repo.EditDepartment(department);
+            PopulateTeachersDropDownList(department.TeacherId);
             return View(department);
         }
 

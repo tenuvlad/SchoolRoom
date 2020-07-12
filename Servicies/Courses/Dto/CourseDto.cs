@@ -12,11 +12,14 @@ namespace Servicies.Courses.Dto
         public int Id { get; set; }
         [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; }
+        public int CourseNumber { get; set; }
         [Range(0, 5)]
         public int Credits { get; set; }
         [DisplayName("Number of students")]
         public int NumberOfStudents { get; set; }
         public int DepartmentId { get; set; }
+        public int StudentId { get; set; }
+        public int TeacherId { get; set; }
         public Department Department { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<CourseAssignment> CourseAssignments { get; set; }

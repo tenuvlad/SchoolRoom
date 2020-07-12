@@ -1,52 +1,59 @@
-﻿using Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Servicies.Courses;
 using Servicies.Courses.Dto;
 using Servicies.Departments;
-using Servicies.Departments.Dto;
 using Servicies.Students;
-using System.Linq;
+using Servicies.Teachers;
 
 namespace SchoolApp.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ICourseService _repo;
-        private readonly IDepartmentService _department;
-        private readonly IStudentService _student;
+        private readonly ICourseService _courseService;
+        private readonly IStudentService _studentService;
+        private readonly ITeacherService _teacherService;
+        private readonly IDepartmentService _departmentService;
 
-        public CourseController(ICourseService repo, IDepartmentService department, IStudentService student)
+        public CourseController(ICourseService courseService, IStudentService studentService, ITeacherService teacherService, IDepartmentService departmentService)
         {
-            _repo = repo;
-            _department = department;
-            _student = student;
+            _courseService = courseService;
+            _studentService = studentService;
+            _teacherService = teacherService;
+            _departmentService = departmentService;
         }
 
-        [HttpGet("course/courseList")]
-        public IActionResult CourseList()
+        [HttpGet]
+        public IActionResult List()
         {
-            return View(_repo.CourseList());
+            return View(_courseService.CourseList());
         }
 
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            return View(_repo.CourseDetail(id));
+            return View(_courseService.CourseDetail(id));
         }
 
         [HttpGet]
         public IActionResult Create()
         {
             PopulateDepartmentsDropDownList();
+            PopulateStudentsDropDownList();
+            PopulateTeachersDropDownList();
             return View();
         }
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in _department.GetAll()
-                                   orderby d.Name
-                                   select d;
-            ViewBag.DepartmentID = new SelectList(departmentsQuery, "Id", "Name", selectedDepartment);
+            ViewBag.DepartmentId = new SelectList(_departmentService.DepartmentList(), "Id", "Name", selectedDepartment);
+        }
+        private void PopulateStudentsDropDownList(object selectedStudent = null)
+        {
+            ViewBag.StudentId = new SelectList(_studentService.StudentList(), "Id", "FullName", selectedStudent);
+        }
+        private void PopulateTeachersDropDownList(object selectedTeachers = null)
+        {
+            ViewBag.TeacherId = new SelectList(_teacherService.TeacherList(), "Id", "FullName", selectedTeachers);
         }
 
         [HttpPost, ActionName("Create")]
@@ -56,36 +63,43 @@ namespace SchoolApp.Controllers
             {
                 return View();
             }
-            _repo.CreateNewCourse(newCourse);
+            _courseService.CreateNewCourse(newCourse);
             PopulateDepartmentsDropDownList(newCourse.DepartmentId);
+            PopulateStudentsDropDownList(newCourse.StudentId);
+            PopulateTeachersDropDownList(newCourse.TeacherId);
             return View(newCourse);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(_repo.CourseDetail(id));
+            PopulateDepartmentsDropDownList();
+            PopulateStudentsDropDownList();
+            PopulateTeachersDropDownList();
+            return View(_courseService.CourseForEditDetail(id));
         }
 
         [HttpPost, ActionName("Edit")]
         public IActionResult EditCourse(CourseDto course)
         {
-            _repo.EditCourse(course);
+            _courseService.EditCourse(course);
             PopulateDepartmentsDropDownList(course.DepartmentId);
+            PopulateStudentsDropDownList(course.StudentId);
+            PopulateTeachersDropDownList(course.TeacherId);
             return View(course);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_repo.CourseDetail(id));
+            return View(_courseService.CourseForEditDetail(id));
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteCourse(int id)
         {
-            _repo.DeleteCourse(id);
-            return RedirectToAction("CourseList");
+            _courseService.DeleteCourse(id);
+            return RedirectToAction("List");
         }
     }
 }
