@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Servicies.OfficeAssignments.Dto
+﻿namespace Servicies.OfficeAssignments.Dto
 {
     public class OfficeAssignmentsDto
     {

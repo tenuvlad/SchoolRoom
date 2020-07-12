@@ -17,6 +17,13 @@ namespace Servicies.Infrastructure
                 .ForMember(teacher => teacher.TeacherFullName, opt => opt
                 .MapFrom(person => person.Teacher.FullName));
 
+            CreateMap<DepartmentDto, Department>()
+                .ForMember(course => course.Courses, opt => opt
+                .MapFrom(course => course.Courses
+                .Select(courseEntity => courseEntity.Id).ToList()));
+
+            CreateMap<Department, DepartmentDto>();
+
             CreateMap<Teacher, TeacherDto>();
             CreateMap<TeacherDto, Teacher>();
 
@@ -26,14 +33,15 @@ namespace Servicies.Infrastructure
             CreateMap<OfficeAssignment, OfficeAssignmentsDto>();
             CreateMap<OfficeAssignmentsDto, OfficeAssignment>();
 
-            CreateMap<DepartmentDto, Department>();
-            CreateMap<Department, DepartmentDto>();
-
             CreateMap<Course, CourseDetailDto>()
                 .ForMember(numberStudent => numberStudent.NumberOfStudents, opt => opt
                 .MapFrom(enroll => enroll.Enrollments
                 .Select(student => student.Student).Count()));
-            CreateMap<CourseDto, Course>();
+
+            CreateMap<Course, CourseDto>();
+            CreateMap<CourseDto, Course>()
+                .ForMember(department => department.DepartmentId, opt => opt
+                .MapFrom(table => table.Department.Id));
         }
     }
 }

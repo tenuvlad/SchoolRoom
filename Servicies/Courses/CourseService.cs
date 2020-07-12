@@ -40,7 +40,9 @@ namespace Servicies.Courses
         public void CreateNewCourse(CourseDto course)
         {
             if (course == null) throw new ArgumentNullException(nameof(course));
-            var courseMap = _mapper.Map<Course>(course);
+            var courseDepart = _context.Courses.Include(depart => depart.DepartmentId).Where(departId => departId.DepartmentId == course.Department.Id);
+            var courseEntity = GetById(course.Id);
+            var courseMap = _mapper.Map<Course>(courseEntity);
             Add(courseMap);
             Commit();
         }
@@ -54,7 +56,7 @@ namespace Servicies.Courses
                 courseEntity.Id = course.Id;
                 courseEntity.Credits = course.Credits;
                 courseEntity.DepartmentId = course.DepartmentId;
-                courseEntity.Enrollments = course.Enrollment;
+                courseEntity.Department = course.Department;
                 courseEntity.Title = course.Title;
             }
             var courseMap = _mapper.Map<Course>(courseEntity);

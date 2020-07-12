@@ -23,6 +23,15 @@
                 <span asp-validation-for="Credits" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Department" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId">
+                        <option value="">-- Select Department --</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

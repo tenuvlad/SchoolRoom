@@ -15,8 +15,10 @@ namespace Servicies.Courses.Dto
         [Range(0, 5)]
         public int Credits { get; set; }
         [DisplayName("Number of students")]
+        public int NumberOfStudents { get; set; }
         public int DepartmentId { get; set; }
-        public ICollection<Enrollment> Enrollment { get; set; }
-
+        public Department Department { get; set; }
+        public ICollection<Enrollment> Enrollments { get; set; }
+        public ICollection<CourseAssignment> CourseAssignments { get; set; }
     }
 }

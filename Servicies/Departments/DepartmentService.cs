@@ -58,6 +58,7 @@ namespace Servicies.Departments
         {
             if (department == null) throw new ArgumentNullException(nameof(department));
             var departmentEntity = GetById(department.Id);
+            var departmentCourseEntity = _context.Courses.Select(id => id.Id).ToList();
             if (departmentEntity != null)
             {
                 departmentEntity.Id = department.Id;
@@ -67,7 +68,7 @@ namespace Servicies.Departments
                 departmentEntity.StartDate = department.StartDate;
                 departmentEntity.Courses = department.Courses;
             }
-            var departmentMap = _mapper.Map<Department>(departmentEntity);
+            var departmentMap = _mapper.Map<Department>(departmentCourseEntity);
             Update(departmentMap);
         }
 

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Servicies.Courses;
 using Servicies.Departments;
 using Servicies.Departments.Dto;
+using System;
 
 namespace SchoolApp.Controllers
 {
