@@ -25,7 +25,7 @@ namespace Servicies.OfficeAssignments
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var officeEntity = GetById(id);
-            var officeTable = _context.OfficeAssignments.Include(table => table.Teacher).ThenInclude(person => person.FullName).Where(person => person.Id == id);
+            var teacher = _context.OfficeAssignments.Include(table => table.Teacher).ToList().Where(teacherId => teacherId.TeacherId == id);
             var officeMap = _mapper.Map<OfficeAssignmentsDto>(officeEntity);
 
             return officeMap;
@@ -34,7 +34,6 @@ namespace Servicies.OfficeAssignments
         public void AddNewOffice(OfficeAssignmentsDto office)
         {
             if (office == null) throw new ArgumentNullException(nameof(office));
-            var officeTable = _context.OfficeAssignments.Include(table => table.Teacher).ThenInclude(person => person.FullName);
             var officeMap = _mapper.Map<OfficeAssignment>(office);
             Add(officeMap);
             Commit();
@@ -43,15 +42,13 @@ namespace Servicies.OfficeAssignments
         public void EditOffice(OfficeAssignmentsDto office)
         {
             if (office == null) throw new ArgumentNullException(nameof(office));
-            var officeEntity = GetById(office.Id);
-            if (officeEntity != null)
+            var officeEntity = new OfficeAssignment
             {
-                officeEntity.Id = office.Id;
-                officeEntity.Location = office.Location;
-                officeEntity.TeacherId = office.InstructorId;
-            }
-            var officeMap = _mapper.Map<OfficeAssignment>(officeEntity);
-            Update(officeMap);
+                Id = office.Id,
+                Location = office.Location,
+                TeacherId = office.TeacherId
+            };
+            Update(officeEntity);
         }
 
         public void DeleteOffice(int id)

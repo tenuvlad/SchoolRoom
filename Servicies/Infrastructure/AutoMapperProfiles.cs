@@ -14,38 +14,49 @@ namespace Servicies.Infrastructure
         public AutoMapperProfiles()
         {
             CreateMap<Department, DepartmentDetailDto>();
-
+            CreateMap<Department, DepartmentDto>();
             CreateMap<DepartmentDto, Department>()
                 .ForMember(course => course.Courses, opt => opt
                 .MapFrom(course => course.Courses
                 .Select(courseEntity => courseEntity.Id).ToList()));
 
-            CreateMap<Department, DepartmentDto>();
-
-            CreateMap<Teacher, TeacherDto>();
             CreateMap<TeacherDto, Teacher>();
+            CreateMap<Teacher, TeacherDto>()
+                .ForMember(course => course.CourseList, opt => opt
+                .MapFrom(table => table.CourseAssignments
+                .Select(entity => entity.Course)));
 
-            CreateMap<Student, StudentDto>();
             CreateMap<StudentDto, Student>();
+            CreateMap<Student, StudentDto>()
+                .ForMember(course => course.CourseList, opt => opt
+                .MapFrom(table => table.Enrollment
+                .Select(entity => entity.Course)));
 
-            CreateMap<OfficeAssignment, OfficeAssignmentsDto>();
             CreateMap<OfficeAssignmentsDto, OfficeAssignment>();
-
-            CreateMap<Course, CourseDetailDto>()
-                .ForMember(numberStudent => numberStudent.NumberOfStudents, opt => opt
-                .MapFrom(enroll => enroll.Enrollments
-                .Select(student => student.Student).Count()));
+            CreateMap<OfficeAssignment, OfficeAssignmentsDto>();
 
             CreateMap<Course, CourseDto>();
+            CreateMap<Course, CourseDetailDto>()
+                .ForMember(numberStudent => numberStudent.NumberOfStudents, opt => opt
+                .MapFrom(table => table.Enrollments
+                .Select(entity => entity.Student).Count()))
+                .ForMember(teacher => teacher.TeachersList, opt => opt
+                .MapFrom(table => table.CourseAssignments
+                .Select(entity => entity.Teacher)))
+                .ForMember(student => student.StudentsList, opt => opt
+                .MapFrom(table => table.Enrollments
+                .Select(entity => entity.Student)));
             CreateMap<CourseDto, Course>()
                 .ForMember(department => department.DepartmentId, opt => opt
                 .MapFrom(table => table.Department.Id))
                 .ForMember(student => student.Enrollments, opt => opt
                 .MapFrom(table => table.Enrollments
-                .Select(entity => entity.Student).Where(studentId => studentId.Id == table.StudentId)))
+                .Select(entity => entity.Student)
+                .Where(studentId => studentId.Id == table.StudentId)))
                 .ForMember(teacher => teacher.CourseAssignments, opt => opt
                 .MapFrom(table => table.CourseAssignments
-                .Select(entity => entity.Teacher).Where(teacherId => teacherId.Id == table.TeacherId)));
+                .Select(entity => entity.Teacher)
+                .Where(teacherId => teacherId.Id == table.TeacherId)));
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Servicies.Students.Dto
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
         public DateTime EnrollmentDate { get; set; }
+        public IEnumerable<Course> CourseList { get; set; }
         public ICollection<Enrollment> Enrollment { get; set; }
     }
 }

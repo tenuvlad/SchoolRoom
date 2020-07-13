@@ -6,23 +6,23 @@ namespace SchoolApp.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly IStudentService _repo;
+        private readonly IStudentService _studentService;
 
-        public StudentController(IStudentService repo)
+        public StudentController(IStudentService studentService)
         {
-            _repo = repo;
+            _studentService = studentService;
         }
 
         [HttpGet]
         public IActionResult List()
         {
-            return View(_repo.StudentList());
+            return View(_studentService.StudentList());
         }
 
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            return View(_repo.StudentDetail(id));
+            return View(_studentService.StudentDetail(id));
         }
 
         [HttpGet]
@@ -39,33 +39,33 @@ namespace SchoolApp.Controllers
                 return View();
             }
 
-            _repo.CreateStudent(newStudent);
+            _studentService.CreateStudent(newStudent);
             return View(newStudent);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(_repo.StudentDetail(id));
+            return View(_studentService.StudentDetail(id));
         }
 
         [HttpPost, ActionName("Edit")]
         public IActionResult EditStudent(StudentDto student)
         {
-            _repo.StudentEdit(student);
+            _studentService.StudentEdit(student);
             return View(student);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_repo.StudentDetail(id));
+            return View(_studentService.StudentDetail(id));
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteStudent(int id)
         {
-            _repo.StudentDelete(id);
+            _studentService.StudentDelete(id);
             return RedirectToAction("List");
         }
     }

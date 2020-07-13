@@ -31,6 +31,7 @@ namespace Servicies.Teachers.Dto
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
         public OfficeAssignment OfficeAssignment { get; set; }
+        public IEnumerable<Course> CourseList { get; set; }
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
     }
 }

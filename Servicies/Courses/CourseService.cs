@@ -29,7 +29,9 @@ namespace Servicies.Courses
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var courseEntity = GetById(id);
-            var course = _context.Courses.Include(table => table.Enrollments).ThenInclude(student => student.Student).ToList();
+            var studentCourse = _context.Courses.Include(table => table.Enrollments).ThenInclude(entity => entity.Student).ToList();
+            var teacherCourse = _context.Courses.Include(table => table.CourseAssignments).ThenInclude(entity => entity.Teacher).ToList();
+            var departmentCourse = _context.Courses.Include(table => table.Department).ToList().Where(departmentId => departmentId.DepartmentId == id);
             var courseMap = _mapper.Map<CourseDetailDto>(courseEntity);
             return courseMap;
         }
@@ -53,6 +55,7 @@ namespace Servicies.Courses
             if (course == null) throw new ArgumentNullException(nameof(course));
             var courseEntity = new Course
             {
+                Id = course.Id,
                 Title = course.Title,
                 Credits = course.Credits,
                 CourseNumber = course.CourseNumber,

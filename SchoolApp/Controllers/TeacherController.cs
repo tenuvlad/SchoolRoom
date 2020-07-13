@@ -6,23 +6,23 @@ namespace SchoolApp.Controllers
 {
     public class TeacherController : Controller
     {
-        private readonly ITeacherService _repo;
+        private readonly ITeacherService _teacherService;
 
-        public TeacherController(ITeacherService repo)
+        public TeacherController(ITeacherService teacherService)
         {
-            _repo = repo;
+            _teacherService = teacherService;
         }
 
         [HttpGet]
         public IActionResult List()
         {
-            return View(_repo.TeacherList());
+            return View(_teacherService.TeacherList());
         }
 
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            return View(_repo.TeacherDetail(id));
+            return View(_teacherService.TeacherDetail(id));
         }
 
         [HttpGet]
@@ -39,33 +39,33 @@ namespace SchoolApp.Controllers
                 return View();
             }
 
-            _repo.CreateTeacher(newTeacher);
+            _teacherService.CreateTeacher(newTeacher);
             return View(newTeacher);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View(_repo.TeacherDetail(id));
+            return View(_teacherService.TeacherDetail(id));
         }
 
         [HttpPost, ActionName("Edit")]
         public IActionResult EditTeacher(TeacherDto teacher)
         {
-            _repo.TeacherEdit(teacher);
+            _teacherService.TeacherEdit(teacher);
             return View(teacher);
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_repo.TeacherDetail(id));
+            return View(_teacherService.TeacherDetail(id));
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteTeacher(int id)
         {
-            _repo.TeacherDelete(id);
+            _teacherService.TeacherDelete(id);
             return RedirectToAction("List");
         }
     }

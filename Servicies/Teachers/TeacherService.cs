@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Servicies.Courses.Dto;
 using Servicies.Teachers.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Servicies.Teachers
@@ -23,6 +25,7 @@ namespace Servicies.Teachers
         public TeacherDto TeacherDetail(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
+            var teacher = _context.Teachers.Include(table => table.CourseAssignments).ThenInclude(entity => entity.Course).ToList();
             var teacherEntity = GetById(id);
             var teacherMap = _mapper.Map<TeacherDto>(teacherEntity);
             return teacherMap;

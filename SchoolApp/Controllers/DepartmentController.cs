@@ -11,25 +11,25 @@ namespace SchoolApp.Controllers
 {
     public class DepartmentController: Controller
     {
-        private readonly IDepartmentService _repo;
+        private readonly IDepartmentService _departmentService;
         private readonly ITeacherService _teacherService;
 
-        public DepartmentController(IDepartmentService repo, ITeacherService teacherService)
+        public DepartmentController(IDepartmentService departmentService, ITeacherService teacherService)
         {
-            _repo = repo;
+            _departmentService = departmentService;
             _teacherService = teacherService;
         }
 
         [HttpGet]
         public IActionResult List()
         {
-            return View(_repo.DepartmentList());
+            return View(_departmentService.DepartmentList());
         }
 
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            return View(_repo.DepartmentDetails(id));
+            return View(_departmentService.DepartmentDetails(id));
         }
 
         [HttpGet]
@@ -51,7 +51,7 @@ namespace SchoolApp.Controllers
                 return View();
             }
 
-            _repo.CreateDepartment(newDepartment);
+            _departmentService.CreateDepartment(newDepartment);
             PopulateTeachersDropDownList(newDepartment.TeacherId);
             return View(newDepartment);
         }
@@ -60,13 +60,13 @@ namespace SchoolApp.Controllers
         public IActionResult Edit(int id)
         {
             PopulateTeachersDropDownList();
-            return View(_repo.DepartmentDetailForEdit(id));
+            return View(_departmentService.DepartmentDetailForEdit(id));
         }
 
         [HttpPost, ActionName("Edit")]
         public IActionResult EditCourse(DepartmentDto department)
         {
-            _repo.EditDepartment(department);
+            _departmentService.EditDepartment(department);
             PopulateTeachersDropDownList(department.TeacherId);
             return View(department);
         }
@@ -74,13 +74,13 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_repo.DepartmentDetailForEdit(id));
+            return View(_departmentService.DepartmentDetailForEdit(id));
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteCourse(int id)
         {
-            _repo.DeleteDepartment(id);
+            _departmentService.DeleteDepartment(id);
             return RedirectToAction("List");
         }
     }

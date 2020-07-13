@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Data;
 using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Servicies.Students.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Servicies.Students
 {
@@ -21,6 +23,7 @@ namespace Servicies.Students
         public StudentDto StudentDetail(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
+            var student = _context.Students.Include(table => table.Enrollment).ThenInclude(entity => entity.Course).ToList();
             var studentEntity = GetById(id);
             var studentMap = _mapper.Map<StudentDto>(studentEntity);
             return studentMap;

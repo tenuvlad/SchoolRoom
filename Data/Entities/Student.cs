@@ -23,7 +23,7 @@ namespace Data.Entities
         {
             get
             {
-                return FirstName + ", " + LastName;
+                return FirstName + " " + LastName;
             }
         }
         [DataType(DataType.Date)]

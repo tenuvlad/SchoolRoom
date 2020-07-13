@@ -34,7 +34,7 @@ namespace Servicies.Departments
             var departmentEntity = new Department
             {
                 Id = department.Id,
-                Name = department.Name,
+                Name = department.DepartmentName,
                 Budget = department.Budget,
                 StartDate = department.StartDate,
                 InstructorId = department.TeacherId,
@@ -67,7 +67,7 @@ namespace Servicies.Departments
             var departmentEntity = new Department
             {
                 Id = department.Id,
-                Name = department.Name,
+                Name = department.DepartmentName,
                 Budget = department.Budget,
                 StartDate = department.StartDate,
                 InstructorId = department.TeacherId
