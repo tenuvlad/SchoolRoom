@@ -46,7 +46,6 @@ namespace Data.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Budget = table.Column<decimal>(type: "money", nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    InstructorId = table.Column<int>(nullable: false),
                     TeacherId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
