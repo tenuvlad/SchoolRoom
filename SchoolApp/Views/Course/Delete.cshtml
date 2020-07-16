@@ -10,23 +10,29 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CourseNumber)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.Credits)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.Credits)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DepartmentId)
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DepartmentId)
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
         </dd>
     </dl>
     

@@ -18,7 +18,9 @@ namespace Servicies.Infrastructure
             CreateMap<DepartmentDto, Department>()
                 .ForMember(course => course.Courses, opt => opt
                 .MapFrom(course => course.Courses
-                .Select(courseEntity => courseEntity.Id).ToList()));
+                .Select(courseEntity => courseEntity.Id).ToList()))
+                .ForMember(teacher => teacher.InstructorId, opt => opt
+                .MapFrom(entity => entity.Teacher.Id));
 
             CreateMap<TeacherDto, Teacher>();
             CreateMap<Teacher, TeacherDto>()

@@ -7,7 +7,6 @@
 <h1>Detail</h1>
 
 <div>
-    <h4>TeacherDto</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -64,6 +63,6 @@
 </body>
 </html>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="List">Back to List</a>
 </div>

@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detail", "Detail", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                @Html.RouteLink("Office", new { action = "Detail", controller = "OfficeAssignment", id = item.Id })
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Detail" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="OfficeAssignment" asp-action="Detail" asp-route-id="@item.Id">Office</a>
             </td>
         </tr>
 }

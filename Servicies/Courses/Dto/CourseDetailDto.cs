@@ -11,6 +11,7 @@ namespace Servicies.Courses.Dto
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public int CourseNumber { get; set; }
         public int Credits { get; set; }
         [DisplayName("Number of students")]
         public int NumberOfStudents { get; set; }

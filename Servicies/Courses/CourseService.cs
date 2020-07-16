@@ -46,6 +46,7 @@ namespace Servicies.Courses
         public IEnumerable<CourseDetailDto> CourseList()
         {
             var course = _context.Courses.Include(table => table.Enrollments).ThenInclude(student => student.Student).ToList();
+            var departmentCourse = _context.Courses.Include(table => table.Department).ToList().Where(departmentId => departmentId.DepartmentId == departmentId.Id);
             var courseMap = _mapper.Map<IEnumerable<CourseDetailDto>>(course);
             return courseMap;
         }

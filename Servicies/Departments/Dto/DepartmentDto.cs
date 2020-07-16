@@ -12,7 +12,7 @@ namespace Servicies.Departments.Dto
         public int Id { get; set; }
         [StringLength(50, MinimumLength = 3)]
         [Display(Name = "Department Name")]
-        public string DepartmentName { get; set; }
+        public string Name { get; set; }
 
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]

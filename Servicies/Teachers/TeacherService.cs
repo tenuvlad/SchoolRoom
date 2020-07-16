@@ -25,7 +25,9 @@ namespace Servicies.Teachers
         public TeacherDto TeacherDetail(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
-            var teacher = _context.Teachers.Include(table => table.CourseAssignments).ThenInclude(entity => entity.Course).ToList();
+            var teacher = _context.Teachers
+                .Include(table => table.CourseAssignments)
+                .ThenInclude(entity => entity.Course).ToList();
             var teacherEntity = GetById(id);
             var teacherMap = _mapper.Map<TeacherDto>(teacherEntity);
             return teacherMap;
@@ -34,6 +36,16 @@ namespace Servicies.Teachers
         public IEnumerable<TeacherDto> TeacherList()
         {
             var teacher = GetAll();
+/*            teacher = _context.Teachers
+                .Include(office => office.OfficeAssignment)
+                .Include(course => course.CourseAssignments)
+                    .ThenInclude(entityCourse => entityCourse.Course)
+                        .ThenInclude(entityEnrollment => entityEnrollment.Enrollments)
+                            .ThenInclude(entityStudent => entityStudent.Student)
+                .Include(course => course.CourseAssignments)
+                    .ThenInclude(entityCourse => entityCourse.Course)
+                        .ThenInclude(entityDepartment => entityDepartment.Department)
+                .OrderBy(name => name.FullName).ToList();*/
             var teacherMap = _mapper.Map<IEnumerable<TeacherDto>>(teacher);
             return teacherMap;
         }
