@@ -15,5 +15,6 @@ namespace Servicies.Courses
         void CreateNewCourse(CourseDto course);
         void EditCourse(CourseDto course);
         void DeleteCourse(int id);
+        bool CourseTitleExist(string title);
     }
 }

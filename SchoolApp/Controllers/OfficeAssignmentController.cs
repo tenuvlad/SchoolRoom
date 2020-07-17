@@ -18,6 +18,12 @@ namespace SchoolApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult List()
+        {
+            return View(_officeAssignmentService.OfficeList());
+        }
+
+        [HttpGet]
         public IActionResult Detail(int id)
         {
             return View(_officeAssignmentService.OfficeDetail(id));
@@ -37,6 +43,7 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Create")]
         public IActionResult CreatePost(OfficeAssignmentsDto newOffice)
         {
+
             if (!ModelState.IsValid)
             {
                 return View();

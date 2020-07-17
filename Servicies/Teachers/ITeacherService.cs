@@ -4,6 +4,7 @@ using Servicies.Teachers.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Servicies.Teachers
 {
@@ -14,5 +15,7 @@ namespace Servicies.Teachers
         void CreateTeacher(TeacherDto teacher);
         void TeacherEdit(TeacherDto teacher);
         void TeacherDelete(int id);
+        bool FirstNameExists(string firstName);
+        bool LastNameExists(string lastName);
     }
 }

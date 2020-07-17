@@ -15,6 +15,7 @@ namespace Servicies.Departments
         DepartmentDto DepartmentDetailForEdit(int id);
         void EditDepartment(DepartmentDto department);
         void DeleteDepartment(int id);
+        bool DepartmentNameExist(string name);
 
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using Servicies.Teachers;
 using Servicies.Teachers.Dto;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SchoolApp.Controllers
 {
@@ -34,6 +37,14 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Create")]
         public IActionResult CreatePost(TeacherDto newTeacher)
         {
+            if (_teacherService.FirstNameExists(newTeacher.FirstName))
+            {
+                ModelState.AddModelError("FirstName", "This name already exist");
+            }
+            if (_teacherService.LastNameExists(newTeacher.LastName))
+            {
+                ModelState.AddModelError("LastName", "This name already exist");
+            }
             if (!ModelState.IsValid)
             {
                 return View();
@@ -52,6 +63,15 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Edit")]
         public IActionResult EditTeacher(TeacherDto teacher)
         {
+            if (_teacherService.FirstNameExists(teacher.FirstName))
+            {
+                ModelState.AddModelError("FirstName", "This name already exist");
+            }
+            if (_teacherService.LastNameExists(teacher.LastName))
+            {
+                ModelState.AddModelError("LastName", "This name already exist");
+            }
+
             _teacherService.TeacherEdit(teacher);
             return View(teacher);
         }

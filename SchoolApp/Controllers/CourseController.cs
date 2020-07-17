@@ -59,6 +59,11 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Create")]
         public IActionResult CreatePost(CourseDto newCourse)
         {
+            if (_courseService.CourseTitleExist(newCourse.Title))
+            {
+                ModelState.AddModelError("Title", "This title already exist");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View();
@@ -82,6 +87,11 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Edit")]
         public IActionResult EditCourse(CourseDto course)
         {
+            if (_courseService.CourseTitleExist(course.Title))
+            {
+                ModelState.AddModelError("Title", "This title already exist");
+            }
+
             _courseService.EditCourse(course);
             PopulateDepartmentsDropDownList(course.DepartmentId);
             PopulateStudentsDropDownList(course.StudentId);

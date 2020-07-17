@@ -20,7 +20,13 @@ namespace Servicies.OfficeAssignments
             _context = context;
             _mapper = mapper;
         }
-
+        public IEnumerable<OfficeAssignmentsDto> OfficeList()
+        {
+            var office = GetAll();
+            var officeTeacher = _context.OfficeAssignments.Include(table => table.Teacher).ToList().Where(teacher => teacher.TeacherId == teacher.Id);
+            var officeMap = _mapper.Map<IEnumerable<OfficeAssignmentsDto>>(office);
+            return officeMap;
+        }
         public OfficeAssignmentsDto OfficeDetail(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));

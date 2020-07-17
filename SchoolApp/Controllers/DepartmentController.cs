@@ -46,6 +46,11 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Create")]
         public IActionResult CreatePost(DepartmentDto newDepartment)
         {
+            if (_departmentService.DepartmentNameExist(newDepartment.Name))
+            {
+                ModelState.AddModelError("Name", "This department already exist");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View();
@@ -66,6 +71,11 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Edit")]
         public IActionResult EditCourse(DepartmentDto department)
         {
+            if (_departmentService.DepartmentNameExist(department.Name))
+            {
+                ModelState.AddModelError("Name", "This department already exist");
+            }
+
             _departmentService.EditDepartment(department);
             PopulateTeachersDropDownList(department.TeacherId);
             return View(department);

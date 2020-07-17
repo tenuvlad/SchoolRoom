@@ -6,6 +6,7 @@ using Servicies.Students.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Servicies.Students
 {
@@ -67,6 +68,20 @@ namespace Servicies.Students
             var studentMap = _mapper.Map<Student>(studentEntity);
             Delete(studentMap);
             Commit();
+        }
+        public bool FirstNameExists(string firstName)
+        {
+            if (_context.Teachers.Any(x => x.FirstName == firstName))
+                return true;
+
+            return false;
+        }
+        public bool LastNameExists(string lastName)
+        {
+            if (_context.Teachers.Any(x => x.LastName == lastName))
+                return true;
+
+            return false;
         }
     }
 }

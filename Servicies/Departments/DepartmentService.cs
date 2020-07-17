@@ -86,5 +86,12 @@ namespace Servicies.Departments
             Delete(departmentMap);
             Commit();
         }
+        public bool DepartmentNameExist(string name)
+        {
+            if (_context.Departments.Any(x => x.Name == name))
+                return true;
+
+            return false;
+        }
     }
 }

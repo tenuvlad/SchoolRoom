@@ -117,5 +117,13 @@ namespace Servicies.Courses
             Delete(courseMap);
             Commit();
         }
+
+        public bool CourseTitleExist(string title)
+        {
+            if (_context.Courses.Any(x => x.Title == title))
+                return true;
+
+            return false;
+        }
     }
 }

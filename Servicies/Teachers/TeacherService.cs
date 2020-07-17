@@ -7,7 +7,9 @@ using Servicies.Teachers.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Servicies.Teachers
 {
@@ -36,16 +38,6 @@ namespace Servicies.Teachers
         public IEnumerable<TeacherDto> TeacherList()
         {
             var teacher = GetAll();
-/*            teacher = _context.Teachers
-                .Include(office => office.OfficeAssignment)
-                .Include(course => course.CourseAssignments)
-                    .ThenInclude(entityCourse => entityCourse.Course)
-                        .ThenInclude(entityEnrollment => entityEnrollment.Enrollments)
-                            .ThenInclude(entityStudent => entityStudent.Student)
-                .Include(course => course.CourseAssignments)
-                    .ThenInclude(entityCourse => entityCourse.Course)
-                        .ThenInclude(entityDepartment => entityDepartment.Department)
-                .OrderBy(name => name.FullName).ToList();*/
             var teacherMap = _mapper.Map<IEnumerable<TeacherDto>>(teacher);
             return teacherMap;
         }
@@ -82,6 +74,20 @@ namespace Servicies.Teachers
             var teacherMap = _mapper.Map<Teacher>(teacherEntity);
             Delete(teacherMap);
             Commit();
+        }
+        public bool FirstNameExists(string firstName)
+        {
+            if (_context.Teachers.Any(x => x.FirstName == firstName))
+                return true;
+
+            return false;
+        }
+        public bool LastNameExists(string lastName)
+        {
+            if (_context.Teachers.Any(x => x.LastName == lastName))
+                return true;
+
+            return false;
         }
     }
 }
