@@ -27,6 +27,7 @@ namespace Servicies.Students.Dto
                 return FirstName + " " + LastName;
             }
         }
+        public int CourseId { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]

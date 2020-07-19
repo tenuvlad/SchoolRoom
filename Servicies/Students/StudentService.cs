@@ -14,11 +14,13 @@ namespace Servicies.Students
     {
         private readonly SchoolContext _context;
         private readonly IMapper _mapper;
+        private readonly IRepository<Enrollment> _enrollmentsRepo;
 
-        public StudentService(SchoolContext context, IMapper mapper) : base(context)
+        public StudentService(SchoolContext context, IMapper mapper, IRepository<Enrollment> enrollmentsRepo) : base(context)
         {
             _context = context;
             _mapper = mapper;
+            _enrollmentsRepo = enrollmentsRepo;
         }
 
         public StudentDto StudentDetail(int id)
@@ -40,8 +42,21 @@ namespace Servicies.Students
         public void CreateStudent(StudentDto student)
         {
             if (student == null) throw new ArgumentNullException(nameof(student));
-            var studentMap = _mapper.Map<Student>(student);
-            Add(studentMap);
+            var studentEntity = new Student
+            {
+                Id = student.Id,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                EnrollmentDate = student.EnrollmentDate
+            };
+            Add(studentEntity);
+            Commit();
+            var enrollment = new Enrollment
+            {
+                StudentId = studentEntity.Id,
+                CourseId = student.CourseId
+            };
+            _enrollmentsRepo.Add(enrollment);
             Commit();
         }
 
@@ -59,6 +74,13 @@ namespace Servicies.Students
             }
             var studentMap = _mapper.Map<Student>(studentEntity);
             Update(studentMap);
+            var enrollment = new Enrollment
+            {
+                StudentId = student.Id,
+                CourseId = student.CourseId
+            };
+            _enrollmentsRepo.Add(enrollment);
+            Commit();
         }
 
         public void StudentDelete(int id)

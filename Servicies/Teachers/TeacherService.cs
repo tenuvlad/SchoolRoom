@@ -2,26 +2,24 @@
 using Data;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Servicies.Courses.Dto;
 using Servicies.Teachers.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Servicies.Teachers
 {
     public class TeacherService : Repository<Teacher>, ITeacherService
     {
         private readonly SchoolContext _context;
+        private readonly IRepository<CourseAssignment> _assignmentRepo;
         private readonly IMapper _mapper;
 
-        public TeacherService(SchoolContext context, IMapper mapper) : base(context)
+        public TeacherService(SchoolContext context, IMapper mapper, IRepository<CourseAssignment> assignmentRepo) : base(context)
         {
             _context = context;
             _mapper = mapper;
+            _assignmentRepo = assignmentRepo;
         }
 
         public TeacherDto TeacherDetail(int id)
@@ -45,8 +43,22 @@ namespace Servicies.Teachers
         public void CreateTeacher(TeacherDto teacher)
         {
             if (teacher == null) throw new ArgumentNullException(nameof(teacher));
-            var teacherMap = _mapper.Map<Teacher>(teacher);
-            Add(teacherMap);
+            var teacherEntity = new Teacher
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                HireDate = teacher.HireDate
+            };
+            Add(teacherEntity);
+            Commit();
+
+            var courseAssignment = new CourseAssignment
+            {
+                TeacherId = teacherEntity.Id,
+                CourseId = teacher.CourseId
+            };
+            _assignmentRepo.Add(courseAssignment);
             Commit();
         }
 
@@ -65,6 +77,13 @@ namespace Servicies.Teachers
             }
             var teacherMap = _mapper.Map<Teacher>(teacherEntity);
             Update(teacherMap);
+            var courseAssignment = new CourseAssignment
+            {
+                TeacherId = teacher.Id,
+                CourseId = teacher.CourseId
+            };
+            _assignmentRepo.Add(courseAssignment);
+            Commit();
         }
 
         public void TeacherDelete(int id)

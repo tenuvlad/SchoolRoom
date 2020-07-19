@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Servicies.Courses;
 using Servicies.Students;
 using Servicies.Students.Dto;
 using System.Threading.Tasks;
@@ -8,10 +10,12 @@ namespace SchoolApp.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;
+        private readonly ICourseService _courseService;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(IStudentService studentService, ICourseService courseService)
         {
             _studentService = studentService;
+            _courseService = courseService;
         }
 
         [HttpGet]
@@ -29,7 +33,12 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            PopulateCoursesDropDownList();
             return View();
+        }
+        private void PopulateCoursesDropDownList(object selectedCourses = null)
+        {
+            ViewBag.CourseId = new SelectList(_courseService.CourseList(), "Id", "Title", selectedCourses);
         }
 
         [HttpPost, ActionName("Create")]
@@ -48,7 +57,7 @@ namespace SchoolApp.Controllers
             {
                 return View();
             }
-
+            PopulateCoursesDropDownList(newStudent.CourseId);
             _studentService.CreateStudent(newStudent);
             return View(newStudent);
         }
@@ -56,6 +65,7 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            PopulateCoursesDropDownList();
             return View(_studentService.StudentDetail(id));
         }
 
@@ -71,6 +81,7 @@ namespace SchoolApp.Controllers
                 ModelState.AddModelError("LastName", "This name already exist");
             }
 
+            PopulateCoursesDropDownList(student.CourseId);
             _studentService.StudentEdit(student);
             return View(student);
         }

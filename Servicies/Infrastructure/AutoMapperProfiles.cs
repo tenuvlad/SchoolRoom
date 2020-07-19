@@ -22,13 +22,21 @@ namespace Servicies.Infrastructure
                 .ForMember(teacher => teacher.TeacherId, opt => opt
                 .MapFrom(entity => entity.Teacher.Id));
 
-            CreateMap<TeacherDto, Teacher>();
+            CreateMap<TeacherDto, Teacher>()
+                .ForMember(courseassignemt => courseassignemt.CourseAssignments, opt => opt
+                .MapFrom(table => table.CourseAssignments
+                .Select(entity => entity.Course)
+                .Where(courseId => courseId.Id == table.CourseId)));
             CreateMap<Teacher, TeacherDto>()
                 .ForMember(course => course.CourseList, opt => opt
                 .MapFrom(table => table.CourseAssignments
                 .Select(entity => entity.Course)));
 
-            CreateMap<StudentDto, Student>();
+            CreateMap<StudentDto, Student>()
+                .ForMember(enrollment => enrollment.Enrollment, opt => opt
+                .MapFrom(table => table.Enrollment
+                .Select(entity => entity.Student)
+                .Where(courseId => courseId.Id == table.CourseId)));
             CreateMap<Student, StudentDto>()
                 .ForMember(course => course.CourseList, opt => opt
                 .MapFrom(table => table.Enrollment

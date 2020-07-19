@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Servicies.Courses;
 using Servicies.Teachers;
 using Servicies.Teachers.Dto;
 using System.Net.Http;
@@ -10,10 +12,12 @@ namespace SchoolApp.Controllers
     public class TeacherController : Controller
     {
         private readonly ITeacherService _teacherService;
+        private readonly ICourseService _courseService;
 
-        public TeacherController(ITeacherService teacherService)
+        public TeacherController(ITeacherService teacherService, ICourseService courseService)
         {
             _teacherService = teacherService;
+            _courseService = courseService;
         }
 
         [HttpGet]
@@ -31,7 +35,13 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            PopulateCoursesDropDownList();
             return View();
+        }
+
+        private void PopulateCoursesDropDownList(object selectedCourses = null)
+        {
+            ViewBag.CourseId = new SelectList(_courseService.CourseList(), "Id", "Title", selectedCourses);
         }
 
         [HttpPost, ActionName("Create")]
@@ -50,6 +60,7 @@ namespace SchoolApp.Controllers
                 return View();
             }
 
+            PopulateCoursesDropDownList(newTeacher.CourseId);
             _teacherService.CreateTeacher(newTeacher);
             return View(newTeacher);
         }
@@ -57,6 +68,7 @@ namespace SchoolApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            PopulateCoursesDropDownList();
             return View(_teacherService.TeacherDetail(id));
         }
 
@@ -72,6 +84,7 @@ namespace SchoolApp.Controllers
                 ModelState.AddModelError("LastName", "This name already exist");
             }
 
+            PopulateCoursesDropDownList(teacher.CourseId);
             _teacherService.TeacherEdit(teacher);
             return View(teacher);
         }
