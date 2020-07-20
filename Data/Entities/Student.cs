@@ -28,8 +28,19 @@ namespace Data.Entities
         }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Birthday")]
+        public DateTime DateOfBirth { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string City { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Email { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
         public DateTime EnrollmentDate { get; set; }
-        public ICollection<Enrollment> Enrollment { get; set; }
+        public IEnumerable<StudentScore> StudentScore { get; set; }
+        public IEnumerable<Enrollment> Enrollment { get; set; }
     }
 }

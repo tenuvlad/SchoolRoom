@@ -1,0 +1,46 @@
+﻿@model Servicies.Grades.Dto.GradeDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfTheGrade" class="control-label"></label>
+                <input asp-for="DateOfTheGrade" class="form-control" />
+                <span asp-validation-for="DateOfTheGrade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentScore" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <select asp-for="StudentId" class="form-control" asp-items="ViewBag.StudentId">
+                        <option value="">-- Select Student --</option>
+                    </select>
+                    <span asp-validation-for="StudentId" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

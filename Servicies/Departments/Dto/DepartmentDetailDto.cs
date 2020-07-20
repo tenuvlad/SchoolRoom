@@ -19,7 +19,7 @@ namespace Servicies.Departments.Dto
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
         [Display(Name = "Teacher")]
-        public int TeacherId { get; set; }
+        public int InstructorId { get; set; }
         public Teacher Teacher { get; set; }
     }
 }

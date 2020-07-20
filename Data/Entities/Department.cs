@@ -18,8 +18,8 @@ namespace Data.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
-        public int TeacherId { get; set; }
+        public int InstructorId { get; set; }
         public Teacher Teacher { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public IEnumerable<Course> Course { get; set; }
     }
 }

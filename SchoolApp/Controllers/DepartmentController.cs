@@ -40,7 +40,7 @@ namespace SchoolApp.Controllers
         }
         private void PopulateTeachersDropDownList(object selectedTeachers = null)
         {
-            ViewBag.TeacherId = new SelectList(_teacherService.TeacherList(), "Id", "FullName", selectedTeachers);
+            ViewBag.InstructorId = new SelectList(_teacherService.TeacherList(), "Id", "FullName", selectedTeachers);
         }
 
         [HttpPost, ActionName("Create")]
@@ -57,7 +57,7 @@ namespace SchoolApp.Controllers
             }
 
             _departmentService.CreateDepartment(newDepartment);
-            PopulateTeachersDropDownList(newDepartment.TeacherId);
+            PopulateTeachersDropDownList(newDepartment.InstructorId);
             return View(newDepartment);
         }
 
@@ -77,7 +77,7 @@ namespace SchoolApp.Controllers
             }
 
             _departmentService.EditDepartment(department);
-            PopulateTeachersDropDownList(department.TeacherId);
+            PopulateTeachersDropDownList(department.InstructorId);
             return View(department);
         }
 

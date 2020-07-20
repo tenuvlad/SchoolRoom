@@ -6,7 +6,6 @@ using Servicies.Students.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Servicies.Students
 {
@@ -26,7 +25,8 @@ namespace Servicies.Students
         public StudentDto StudentDetail(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
-            var studentModel = _context.Students.Include(table => table.Enrollment).ThenInclude(entity => entity.Course).ToList();
+            var studentCourseList = _context.Students.Include(table => table.Enrollment).ThenInclude(entity => entity.Course).ToList();
+            var studentGradeList = _context.Students.Include(table => table.StudentScore).ThenInclude(entity => entity.Grade).ToList();
             var studentEntity = GetById(id);
             var studentMap = _mapper.Map<StudentDto>(studentEntity);
             return studentMap;
@@ -47,6 +47,9 @@ namespace Servicies.Students
                 Id = student.Id,
                 FirstName = student.FirstName,
                 LastName = student.LastName,
+                DateOfBirth = student.DateOfBirth,
+                City = student.City,
+                Email = student.Email,
                 EnrollmentDate = student.EnrollmentDate
             };
             Add(studentEntity);
@@ -69,6 +72,9 @@ namespace Servicies.Students
                 studentEntity.Id = student.Id;
                 studentEntity.FirstName = student.FirstName;
                 studentEntity.LastName = student.LastName;
+                studentEntity.DateOfBirth = student.DateOfBirth;
+                studentEntity.City = student.City;
+                studentEntity.Email = student.Email;
                 studentEntity.EnrollmentDate = student.EnrollmentDate;
                 studentEntity.Enrollment = student.Enrollment;
             }
@@ -90,20 +96,6 @@ namespace Servicies.Students
             var studentMap = _mapper.Map<Student>(studentEntity);
             Delete(studentMap);
             Commit();
-        }
-        public bool FirstNameExists(string firstName)
-        {
-            if (_context.Teachers.Any(x => x.FirstName == firstName))
-                return true;
-
-            return false;
-        }
-        public bool LastNameExists(string lastName)
-        {
-            if (_context.Teachers.Any(x => x.LastName == lastName))
-                return true;
-
-            return false;
         }
     }
 }

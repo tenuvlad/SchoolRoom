@@ -26,7 +26,7 @@ namespace Servicies.Teachers
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var teacher = _context.Teachers
-                .Include(table => table.CourseAssignments)
+                .Include(table => table.CourseAssignment)
                 .ThenInclude(entity => entity.Course).ToList();
             var teacherEntity = GetById(id);
             var teacherMap = _mapper.Map<TeacherDto>(teacherEntity);
@@ -48,6 +48,9 @@ namespace Servicies.Teachers
                 Id = teacher.Id,
                 FirstName = teacher.FirstName,
                 LastName = teacher.LastName,
+                DateOfBirth = teacher.DateOfBirth,
+                City = teacher.City,
+                Email = teacher.Email,
                 HireDate = teacher.HireDate
             };
             Add(teacherEntity);
@@ -71,9 +74,11 @@ namespace Servicies.Teachers
                 teacherEntity.Id = teacher.Id;
                 teacherEntity.FirstName = teacher.FirstName;
                 teacherEntity.LastName = teacher.LastName;
+                teacherEntity.DateOfBirth = teacher.DateOfBirth;
+                teacherEntity.City = teacher.City;
+                teacherEntity.Email = teacher.Email;
                 teacherEntity.HireDate = teacher.HireDate;
                 teacherEntity.OfficeAssignment = teacher.OfficeAssignment;
-                teacherEntity.CourseAssignments = teacher.CourseAssignments;
             }
             var teacherMap = _mapper.Map<Teacher>(teacherEntity);
             Update(teacherMap);
@@ -94,19 +99,6 @@ namespace Servicies.Teachers
             Delete(teacherMap);
             Commit();
         }
-        public bool FirstNameExists(string firstName)
-        {
-            if (_context.Teachers.Any(x => x.FirstName == firstName))
-                return true;
 
-            return false;
-        }
-        public bool LastNameExists(string lastName)
-        {
-            if (_context.Teachers.Any(x => x.LastName == lastName))
-                return true;
-
-            return false;
-        }
     }
 }

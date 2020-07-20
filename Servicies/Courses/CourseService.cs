@@ -29,8 +29,8 @@ namespace Servicies.Courses
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var courseEntity = GetById(id);
-            var studentCourse = _context.Courses.Include(table => table.Enrollments).ThenInclude(entity => entity.Student).ToList();
-            var teacherCourse = _context.Courses.Include(table => table.CourseAssignments).ThenInclude(entity => entity.Teacher).ToList();
+            var studentCourse = _context.Courses.Include(table => table.Enrollment).ThenInclude(entity => entity.Student).ToList();
+            var teacherCourse = _context.Courses.Include(table => table.CourseAssignment).ThenInclude(entity => entity.Teacher).ToList();
             var departmentCourse = _context.Courses.Include(table => table.Department).ToList().Where(departmentId => departmentId.DepartmentId == id);
             var courseMap = _mapper.Map<CourseDetailDto>(courseEntity);
             return courseMap;
@@ -45,7 +45,7 @@ namespace Servicies.Courses
 
         public IEnumerable<CourseDetailDto> CourseList()
         {
-            var course = _context.Courses.Include(table => table.Enrollments).ThenInclude(student => student.Student).ToList();
+            var course = _context.Courses.Include(table => table.Enrollment).ThenInclude(student => student.Student).ToList();
             var departmentCourse = _context.Courses.Include(table => table.Department).ToList().Where(departmentId => departmentId.DepartmentId == departmentId.Id);
             var courseMap = _mapper.Map<IEnumerable<CourseDetailDto>>(course);
             return courseMap;

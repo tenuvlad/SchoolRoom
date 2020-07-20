@@ -10,6 +10,8 @@ namespace Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<StudentScore> StudentScores { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
@@ -21,11 +23,15 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Enrollment>()
-                        .HasKey(z => new { z.CourseId, z.StudentId });
+                        .HasKey(entityId => new { entityId.CourseId, entityId.StudentId });
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<StudentScore>()
+                        .HasKey(entityId => new { entityId.GradeId, entityId.StudentId });
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<CourseAssignment>()
-                        .HasKey(z => new { z.CourseId, z.TeacherId });
+                        .HasKey(entityId => new { entityId.CourseId, entityId.TeacherId });
         }
     }
 }

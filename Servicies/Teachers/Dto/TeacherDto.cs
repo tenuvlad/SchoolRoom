@@ -29,11 +29,25 @@ namespace Servicies.Teachers.Dto
         }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Birthday")]
+        public DateTime DateOfBirth { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string City { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Email { get; set; }
+        public int Age
+        {
+            get { return (DateTime.Today - DateOfBirth).Days / 365; }
+        }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
         public int CourseId { get; set; }
         public OfficeAssignment OfficeAssignment { get; set; }
         public IEnumerable<Course> CourseList { get; set; }
-        public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        public IEnumerable<CourseAssignment> CourseAssignments { get; set; }
     }
 }

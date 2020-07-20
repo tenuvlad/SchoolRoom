@@ -21,8 +21,11 @@ namespace Servicies.Courses.Dto
         public int DepartmentId { get; set; }
         public int StudentId { get; set; }
         public int TeacherId { get; set; }
+        [DisplayName("Departments")]
         public Department Department { get; set; }
-        public ICollection<Enrollment> Enrollments { get; set; }
-        public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        [DisplayName("Students")]
+        public IEnumerable<Enrollment> Enrollments { get; set; }
+        [DisplayName("Teachers")]
+        public IEnumerable<CourseAssignment> CourseAssignments { get; set; }
     }
 }

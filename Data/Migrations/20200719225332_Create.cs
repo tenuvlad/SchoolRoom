@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Score = table.Column<double>(nullable: false),
+                    DateOfTheGrade = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
@@ -15,6 +29,9 @@ namespace Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    City = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
                     EnrollmentDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -30,11 +47,38 @@ namespace Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    City = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
                     HireDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teachers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentScores",
+                columns: table => new
+                {
+                    StudentId = table.Column<int>(nullable: false),
+                    GradeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentScores", x => new { x.GradeId, x.StudentId });
+                    table.ForeignKey(
+                        name: "FK_StudentScores_Grades_GradeId",
+                        column: x => x.GradeId,
+                        principalTable: "Grades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentScores_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,6 +90,7 @@ namespace Data.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Budget = table.Column<decimal>(type: "money", nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
+                    InstructorId = table.Column<int>(nullable: false),
                     TeacherId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -130,8 +175,7 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(nullable: false),
-                    StudentId = table.Column<int>(nullable: false),
-                    Grade = table.Column<int>(nullable: false)
+                    StudentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,6 +219,11 @@ namespace Data.Migrations
                 table: "OfficeAssignments",
                 column: "TeacherId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentScores_StudentId",
+                table: "StudentScores",
+                column: "StudentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -189,7 +238,13 @@ namespace Data.Migrations
                 name: "OfficeAssignments");
 
             migrationBuilder.DropTable(
+                name: "StudentScores");
+
+            migrationBuilder.DropTable(
                 name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "Students");

@@ -33,28 +33,80 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EnrollmentDate)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreAverage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreAverage)
+        </dd>
     </dl>
 </div>
 <!DOCTYPE html>
-<h3>List of courses</h3>
+<h5>List of courses</h5>
 <html>
 <body>
     <table class="table">
         <tbody>
-            @foreach (var item in Model.CourseList)
+            @foreach (var item in Model.CoursesList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => item.Credits)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Credits)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Title)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h5>List of grades</h5>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.GradesList)
             {
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => item.Credits)
+                    @Html.DisplayNameFor(model => item.Score)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => item.Credits)
+                    @Html.DisplayFor(model => item.Score)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => item.Title)
+                    @Html.DisplayNameFor(model => item.DateOfTheGrade)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => item.Title)
+                    @Html.DisplayFor(model => item.DateOfTheGrade)
                 </td>
             </tr>
             }
@@ -63,6 +115,6 @@
 </body>
 </html>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     <a asp-action="List">Back to List</a>
 </div>

@@ -27,12 +27,30 @@ namespace Servicies.Students.Dto
                 return FirstName + " " + LastName;
             }
         }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Birthday")]
+        public DateTime DateOfBirth { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string City { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Email { get; set; }
+        public int Age
+        {
+            get { return (DateTime.Today - DateOfBirth).Days / 365; }
+        }
+        [Display(Name = "Average score")]
+        public double ScoreAverage { get; set; }
         public int CourseId { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
         public DateTime EnrollmentDate { get; set; }
-        public IEnumerable<Course> CourseList { get; set; }
-        public ICollection<Enrollment> Enrollment { get; set; }
+        public IEnumerable<Grade> GradesList { get; set; }
+        public IEnumerable<Course> CoursesList { get; set; }
+        public IEnumerable<Enrollment> Enrollment { get; set; }
+        public IEnumerable<StudentScore> StudentScore { get; set; }
     }
 }

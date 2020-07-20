@@ -14,7 +14,7 @@ namespace Data.Entities
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        public ICollection<Enrollment> Enrollments { get; set; }
-        public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        public IEnumerable<Enrollment> Enrollment { get; set; }
+        public IEnumerable<CourseAssignment> CourseAssignment { get; set; }
     }
 }

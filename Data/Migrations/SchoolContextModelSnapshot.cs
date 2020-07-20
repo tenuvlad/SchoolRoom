@@ -99,14 +99,29 @@ namespace Data.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId", "StudentId");
 
                     b.HasIndex("StudentId");
 
                     b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("Data.Entities.Grade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateOfTheGrade")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("Data.Entities.OfficeAssignment", b =>
@@ -138,6 +153,19 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
@@ -157,12 +185,40 @@ namespace Data.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Data.Entities.StudentScore", b =>
+                {
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GradeId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentScores");
+                });
+
             modelBuilder.Entity("Data.Entities.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -186,7 +242,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.Course", b =>
                 {
                     b.HasOne("Data.Entities.Department", "Department")
-                        .WithMany("Courses")
+                        .WithMany("Course")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -195,13 +251,13 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.CourseAssignment", b =>
                 {
                     b.HasOne("Data.Entities.Course", "Course")
-                        .WithMany("CourseAssignments")
+                        .WithMany("CourseAssignment")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Data.Entities.Teacher", "Teacher")
-                        .WithMany("CourseAssignments")
+                        .WithMany("CourseAssignment")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -217,7 +273,7 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.Enrollment", b =>
                 {
                     b.HasOne("Data.Entities.Course", "Course")
-                        .WithMany("Enrollments")
+                        .WithMany("Enrollment")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -234,6 +290,21 @@ namespace Data.Migrations
                     b.HasOne("Data.Entities.Teacher", "Teacher")
                         .WithOne("OfficeAssignment")
                         .HasForeignKey("Data.Entities.OfficeAssignment", "TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Data.Entities.StudentScore", b =>
+                {
+                    b.HasOne("Data.Entities.Grade", "Grade")
+                        .WithMany("StudentScore")
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.Student", "Student")
+                        .WithMany("StudentScore")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

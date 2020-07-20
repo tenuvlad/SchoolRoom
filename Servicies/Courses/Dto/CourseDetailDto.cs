@@ -1,5 +1,6 @@
 ﻿using Data.Entities;
 using Servicies.Departments.Dto;
+using Servicies.Students.Dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,9 @@ namespace Servicies.Courses.Dto
         public int NumberOfStudents { get; set; }
         [DisplayName("Department")]
         public Department Department { get; set; }
+        [DisplayName("Teachers")]
         public IEnumerable<Teacher> TeachersList { get; set; }
-        public IEnumerable<Student> StudentsList { get; set; }
+        [DisplayName("Students")]
+        public IEnumerable<StudentDto> StudentsList { get; set; }
     }
 }

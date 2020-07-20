@@ -1,0 +1,50 @@
+﻿@model Servicies.Grades.Dto.GradeDto
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfTheGrade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfTheGrade)
+        </dd>
+    </dl>
+</div>
+<!DOCTYPE html>
+<h3>Student name</h3>
+<html>
+<body>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.StudentsList)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.FullName)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="List">Back to List</a>
+</div>

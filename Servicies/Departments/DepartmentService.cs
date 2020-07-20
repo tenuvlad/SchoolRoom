@@ -23,7 +23,7 @@ namespace Servicies.Departments
         public IEnumerable<DepartmentDetailDto> DepartmentList()
         {
             var department = GetAll();
-            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacher => teacher.TeacherId == teacher.Id);
+            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacher => teacher.InstructorId == teacher.Id);
             var departmentMap = _mapper.Map<IEnumerable<DepartmentDetailDto>>(department);
 
             return departmentMap;
@@ -38,7 +38,7 @@ namespace Servicies.Departments
                 Name = department.Name,
                 Budget = department.Budget,
                 StartDate = department.StartDate,
-                TeacherId = department.TeacherId,
+                InstructorId = department.InstructorId,
             };
             Add(departmentEntity);
             Commit();
@@ -48,7 +48,7 @@ namespace Servicies.Departments
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var departmentEntity = GetById(id);
-            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacherId => teacherId.TeacherId == id);
+            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacherId => teacherId.InstructorId == id);
             var departmentMap = _mapper.Map<DepartmentDetailDto>(departmentEntity);
 
             return departmentMap;
@@ -58,7 +58,7 @@ namespace Servicies.Departments
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var departmentEntity = GetById(id);
-            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacherId => teacherId.TeacherId == id);
+            var departmentTeacher = _context.Departments.Include(table => table.Teacher).ToList().Where(teacherId => teacherId.InstructorId == id);
             var departmentMap = _mapper.Map<DepartmentDto>(departmentEntity);
 
             return departmentMap;
@@ -73,7 +73,7 @@ namespace Servicies.Departments
                 Name = department.Name,
                 Budget = department.Budget,
                 StartDate = department.StartDate,
-                TeacherId = department.TeacherId
+                InstructorId = department.InstructorId
             };
             Update(departmentEntity);
         }

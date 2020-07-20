@@ -1,9 +1,7 @@
 ﻿using Data;
 using Data.Entities;
 using Servicies.Courses.Dto;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Servicies.Courses
 {

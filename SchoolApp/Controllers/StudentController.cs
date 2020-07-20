@@ -44,14 +44,6 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Create")]
         public IActionResult CreatePost(StudentDto newStudent)
         {
-            if (_studentService.FirstNameExists(newStudent.FirstName))
-            {
-                ModelState.AddModelError("FirstName", "This name already exist");
-            }
-            if (_studentService.LastNameExists(newStudent.LastName))
-            {
-                ModelState.AddModelError("LastName", "This name already exist");
-            }
 
             if (!ModelState.IsValid)
             {
@@ -72,15 +64,10 @@ namespace SchoolApp.Controllers
         [HttpPost, ActionName("Edit")]
         public IActionResult EditStudent(StudentDto student)
         {
-            if (_studentService.FirstNameExists(student.FirstName))
+            if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("FirstName", "This name already exist");
+                return View();
             }
-            if (_studentService.LastNameExists(student.LastName))
-            {
-                ModelState.AddModelError("LastName", "This name already exist");
-            }
-
             PopulateCoursesDropDownList(student.CourseId);
             _studentService.StudentEdit(student);
             return View(student);

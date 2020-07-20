@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Servicies.Courses;
 using Servicies.Departments;
+using Servicies.Grades;
 using Servicies.OfficeAssignments;
 using Servicies.Students;
 using Servicies.Teachers;
@@ -24,7 +25,8 @@ namespace Servicies.Infrastructure
 				.AddScoped<IDepartmentService, DepartmentService>()
 				.AddScoped<IOfficeAssignmentService, OfficeAssignmentService>()
 				.AddScoped<ITeacherService, TeacherService>()
-				.AddScoped<IStudentService, StudentService>();
+				.AddScoped<IStudentService, StudentService>()
+				.AddScoped<IGradeService, GradeService>();
 
 			return services;
 
