@@ -13,58 +13,47 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                <label asp-for="@Model.First().FullName"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                <label asp-for="@Model.First().EnrollmentDate"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FullName)
+                <label asp-for="@Model.First().Age"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnrollmentDate)
+                <label asp-for="@Model.First().City"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Age)
+                <label asp-for="@Model.First().Email"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ScoreAverage)
+                <label asp-for="@Model.First().ScoreAverage"></label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                <label asp-for="@item.FullName">@item.FullName</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                <label asp-for="@item.EnrollmentDate">@item.EnrollmentDate</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                <label asp-for="@item.Age">@item.Age</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                <label asp-for="@item.City">@item.City</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Age)
+                <label asp-for="@item.Email">@item.Email</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScoreAverage)
+                <label asp-for="@item.ScoreAverage">@item.ScoreAverage</label>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -73,6 +62,6 @@
                 <a asp-controller="Grade" asp-action="Create">Add Score</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

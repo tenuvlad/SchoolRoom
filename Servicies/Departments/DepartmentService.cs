@@ -76,14 +76,14 @@ namespace Servicies.Departments
                 InstructorId = department.InstructorId
             };
             Update(departmentEntity);
+            Commit();
         }
 
         public void DeleteDepartment(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var departmentEntity = GetById(id);
-            var departmentMap = _mapper.Map<Department>(departmentEntity);
-            Delete(departmentMap);
+            Delete(departmentEntity);
             Commit();
         }
         public bool DepartmentNameExist(string name)

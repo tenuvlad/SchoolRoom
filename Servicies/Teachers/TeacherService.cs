@@ -80,8 +80,7 @@ namespace Servicies.Teachers
                 teacherEntity.HireDate = teacher.HireDate;
                 teacherEntity.OfficeAssignment = teacher.OfficeAssignment;
             }
-            var teacherMap = _mapper.Map<Teacher>(teacherEntity);
-            Update(teacherMap);
+            Update(teacherEntity);
             var courseAssignment = new CourseAssignment
             {
                 TeacherId = teacher.Id,
@@ -95,8 +94,7 @@ namespace Servicies.Teachers
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var teacherEntity = GetById(id);
-            var teacherMap = _mapper.Map<Teacher>(teacherEntity);
-            Delete(teacherMap);
+            Delete(teacherEntity);
             Commit();
         }
 

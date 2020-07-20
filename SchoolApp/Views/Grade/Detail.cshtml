@@ -10,16 +10,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Score)
+            <label asp-for="Score"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Score)
+        <dd style="color:yellowgreen">
+            <label asp-for="Score">@Model.Score</label>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfTheGrade)
+            <label asp-for="DateOfTheGrade"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateOfTheGrade)
+        <dd style="color:yellowgreen">
+            <label asp-for="DateOfTheGrade">@Model.DateOfTheGrade</label>
         </dd>
     </dl>
 </div>
@@ -33,10 +33,7 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.FullName)
+                    <label asp-for="@item.FullName">@item.FullName</label>
                 </td>
             </tr>
             }

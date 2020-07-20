@@ -10,56 +10,56 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+        <dt>
+            <label asp-for="FirstName"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+        <dd style="color:yellowgreen">
+            <label asp-for="FirstName">@Model.FirstName</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
+        <dt>
+            <label asp-for="LastName"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+        <dd style="color:yellowgreen">
+            <label asp-for="LastName">@Model.LastName</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FullName)
+        <dt>
+            <label asp-for="FullName"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FullName)
+        <dd style="color:yellowgreen">
+            <label asp-for="FullName">@Model.FullName</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        <dt>
+            <label asp-for="EnrollmentDate"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EnrollmentDate)
+        <dd style="color:yellowgreen">
+            <label asp-for="EnrollmentDate">@Model.EnrollmentDate</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
+        <dt>
+            <label asp-for="Age"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Age)
+        <dd style="color:yellowgreen">
+            <label asp-for="Age">@Model.Age</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+        <dt>
+            <label asp-for="City"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+        <dd style="color:yellowgreen">
+            <label asp-for="City">@Model.City</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
+        <dt>
+            <label asp-for="Email"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
+        <dd style="color:yellowgreen">
+            <label asp-for="Email">@Model.Email</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ScoreAverage)
+        <dt>
+            <label asp-for="ScoreAverage"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ScoreAverage)
+        <dd style="color:yellowgreen">
+            <label asp-for="ScoreAverage">@Model.ScoreAverage</label>
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="List">Back to List</a>

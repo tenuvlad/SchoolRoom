@@ -8,18 +8,18 @@
 
 <div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher)
+    <dl class="dl-horizontal">
+        <dt>
+            <label asp-for="Teacher"></label>
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher.FullName)
+        <dd style="color:yellowgreen">
+            <label asp-for="Teacher.FullName">@Model.Teacher.FullName</label>
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
+        <dt>
+            <label asp-for="Location"></label>
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location)
+        <dd style="color:yellowgreen">
+            <label asp-for="Location">@Model.Location</label>
         </dd>
     </dl>
 </div>

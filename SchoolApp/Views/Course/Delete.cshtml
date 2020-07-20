@@ -11,28 +11,22 @@
     <hr />
     <dl class="row">
         <dt>
-            @Html.DisplayNameFor(model => model.CourseNumber)
+            <label asp-for="Title"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CourseNumber)
+        <dd style="color:yellowgreen">
+            <label asp-for="Title">@Model.Title</label>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            <label asp-for="Credits"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
+        <dd style="color:yellowgreen">
+            <label asp-for="Credits">@Model.Credits</label>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Credits)
+            <label asp-for="Department"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Credits)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Department.Name)
+        <dd style="color:yellowgreen">
+            <label asp-for="Department.Name">@Model.Department.Name</label>
         </dd>
     </dl>
     

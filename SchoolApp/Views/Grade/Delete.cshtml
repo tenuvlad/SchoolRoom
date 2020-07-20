@@ -11,16 +11,16 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Score)
+            <label asp-for="Score"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Score)
+        <dd style="color:yellowgreen">
+            <label asp-for="Score">@Model.Score</label>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DateOfTheGrade)
+            <label asp-for="DateOfTheGrade"></label>
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateOfTheGrade)
+        <dd style="color:yellowgreen">
+            <label asp-for="DateOfTheGrade">@Model.DateOfTheGrade</label>
         </dd>
     </dl>
     <form asp-action="Delete">

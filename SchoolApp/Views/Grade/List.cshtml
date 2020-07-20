@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Score)
+                <label asp-for="@Model.First().Score"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfTheGrade)
+                <label asp-for="@Model.First().DateOfTheGrade"></label>
             </th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Score)
+                <label asp-for="@item.Score">@item.Score</label>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfTheGrade)
+                <label asp-for="@item.DateOfTheGrade">@item.DateOfTheGrade</label>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

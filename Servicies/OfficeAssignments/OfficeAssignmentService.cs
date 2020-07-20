@@ -55,14 +55,14 @@ namespace Servicies.OfficeAssignments
                 TeacherId = office.TeacherId
             };
             Update(officeEntity);
+            Commit();
         }
 
         public void DeleteOffice(int id)
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var officeEntity = GetById(id);
-            var officeMap = _mapper.Map<OfficeAssignment>(officeEntity);
-            Delete(officeMap);
+            Delete(officeEntity);
             Commit();
         }
     }

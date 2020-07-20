@@ -71,8 +71,7 @@ namespace Servicies.Grades
                 gradeEntity.Score = grade.Score;
                 gradeEntity.DateOfTheGrade = grade.DateOfTheGrade;
             }
-            var gradeMap = _mapper.Map<Grade>(gradeEntity);
-            Update(gradeMap);
+            Update(gradeEntity);
             var studentScore = new StudentScore
             {
                 StudentId = grade.StudentId,
@@ -85,8 +84,7 @@ namespace Servicies.Grades
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var gradeEntity = GetById(id);
-            var gradeMap = _mapper.Map<Grade>(gradeEntity);
-            Delete(gradeMap);
+            Delete(gradeEntity);
             Commit();
         }
     }

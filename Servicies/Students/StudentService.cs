@@ -78,8 +78,7 @@ namespace Servicies.Students
                 studentEntity.EnrollmentDate = student.EnrollmentDate;
                 studentEntity.Enrollment = student.Enrollment;
             }
-            var studentMap = _mapper.Map<Student>(studentEntity);
-            Update(studentMap);
+            Update(studentEntity);
             var enrollment = new Enrollment
             {
                 StudentId = student.Id,
@@ -93,8 +92,7 @@ namespace Servicies.Students
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var studentEntity = GetById(id);
-            var studentMap = _mapper.Map<Student>(studentEntity);
-            Delete(studentMap);
+            Delete(studentEntity);
             Commit();
         }
     }

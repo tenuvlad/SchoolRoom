@@ -12,16 +12,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <label asp-for="@Model.First().Name"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Budget)
+                <label asp-for="@Model.First().Budget"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                <label asp-for="@Model.First().StartDate"></label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher)
+                <label asp-for="@Model.First().Teacher"></label>
             </th>
             <th></th>
         </tr>
@@ -31,16 +31,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <label asp-for="@item.Name">@item.Name</label>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Budget)
+                    <label asp-for="@item.Budget">@item.Budget</label>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    <label asp-for="@item.StartDate">@item.StartDate</label>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Teacher.FullName)
+                    <label asp-for="@item.Teacher.FullName">@item.Teacher.FullName</label>
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

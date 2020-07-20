@@ -113,8 +113,7 @@ namespace Servicies.Courses
         {
             if (id == 0) throw new ArgumentNullException(nameof(id));
             var courseEntity = GetById(id);
-            var courseMap = _mapper.Map<Course>(courseEntity);
-            Delete(courseMap);
+            Delete(courseEntity);
             Commit();
         }
 

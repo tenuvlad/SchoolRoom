@@ -9,29 +9,29 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+        <dt>
+            <label asp-for="Title"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+        <dd style="color:yellowgreen">
+            <label asp-for="Title">@Model.Title</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Credits)
+        <dt>
+            <label asp-for="NumberOfStudents"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Credits)
+        <dd style="color:yellowgreen">
+            <label asp-for="NumberOfStudents">@Model.NumberOfStudents</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfStudents)
+        <dt>
+            <label asp-for="Credits"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfStudents)
+        <dd style="color:yellowgreen">
+            <label asp-for="Credits">@Model.Credits</label>
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
+        <dt>
+            <label asp-for="Department"></label>
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Department.Name)
+        <dd style="color:yellowgreen">
+            <label asp-for="Department.Name">@Model.Department.Name</label>
         </dd>
     </dl>
 </div>
@@ -46,10 +46,10 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => item.FullName)
+                    <label asp-for="@item.FullName">@item.FullName</label>
                 </td>
                 <td>
-                    @Html.DisplayFor(model => item.HireDate)
+                    <label asp-for="@item.HireDate">@item.HireDate</label>
                 </td>
             </tr>
             }
@@ -62,10 +62,10 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(model => item.FullName)
+                    <label asp-for="@item.FullName">@item.FullName</label>
                 </td>
                 <td>
-                    @Html.DisplayFor(model => item.EnrollmentDate)
+                    <label asp-for="@item.EnrollmentDate">@item.EnrollmentDate</label>
                 </td>
             </tr>
             }
